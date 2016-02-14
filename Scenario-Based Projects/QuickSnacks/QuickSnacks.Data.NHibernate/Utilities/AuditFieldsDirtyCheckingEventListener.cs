@@ -1,0 +1,32 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using NHibernate.Event;
+using NHibernate.Event.Default;
+using QuickSnacks.Data.NHibernate.Entities;
+
+namespace QuickSnacks.Data.NHibernate.Utilities
+{
+    public class AuditFieldsDirtyCheckingEventListener : DefaultFlushEntityEventListener
+    {
+        protected override void DirtyCheck(FlushEntityEvent e)
+        {
+            base.DirtyCheck(e);
+            if (e.DirtyProperties != null &&
+                e.DirtyProperties.Any() &&
+                //IAuditableEntity is my inteface for audited entities
+                e.Entity is IAuditableEntity)
+                e.DirtyProperties = e.DirtyProperties
+                 .Concat(GetAdditionalDirtyProperties(e)).ToArray();
+        }
+
+        protected virtual IEnumerable<int> GetAdditionalDirtyProperties(FlushEntityEvent @event)
+        {
+            yield return Array.IndexOf(@event.EntityEntry.Persister.PropertyNames, "CreateDate");
+
+            yield return Array.IndexOf(@event.EntityEntry.Persister.PropertyNames, "EditDate");
+        }
+    }
+}
