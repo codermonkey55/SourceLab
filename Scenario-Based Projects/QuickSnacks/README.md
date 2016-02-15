@@ -17,11 +17,12 @@ Initially, I plan to utilize and demonstrate the use of the following patterns a
  * Using nUnit v3.0
 * [ASP.NET MVC](http://www.asp.net/mvc)
 * [ASP.NET Web API](http://www.asp.net/web-api)
-* [KnockoutJS](https://knockoutjs.com//)
+* [KnockoutJS](https://www.knockoutjs.com//)
 * [Bootstrap](http://getbootstrap.com/) (because I'm not a designer :)
 * Microsoft SQL Server for persistence, with data access through:
  * "Raw" ADO.NET
  * Entity Framework
+ * NHibernate
 * Design with UML
 * Domain-Driven Design
  * Bounded Contexts
