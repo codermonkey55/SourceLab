@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwiftTier.Core", "SwiftTier.Core\SwiftTier.Core.csproj", "{BB24A1B7-AEF7-456A-903D-584A19268853}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwiftTier", "SwiftTier\SwiftTier.csproj", "{B56F6012-64D9-4E8F-B517-323CCF4B39FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwiftTier.Web", "SwiftTier.Web\SwiftTier.Web.csproj", "{E9348478-7A08-4E5C-8355-D6C3A2BCA649}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwiftTier.API", "SwiftTier.API\SwiftTier.API.csproj", "{297B2A93-9B97-4B51-A6EC-52E064469EE4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwiftTier.Persistence", "SwiftTier.Persistence\SwiftTier.Persistence.csproj", "{34C0C4E7-7B47-4975-B968-31B498156010}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwiftTier.Domain", "SwiftTier.Domain\SwiftTier.Domain.csproj", "{B49C2A50-D59C-4E68-858A-F464F30BA0EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB24A1B7-AEF7-456A-903D-584A19268853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB24A1B7-AEF7-456A-903D-584A19268853}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB24A1B7-AEF7-456A-903D-584A19268853}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB24A1B7-AEF7-456A-903D-584A19268853}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B56F6012-64D9-4E8F-B517-323CCF4B39FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B56F6012-64D9-4E8F-B517-323CCF4B39FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B56F6012-64D9-4E8F-B517-323CCF4B39FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B56F6012-64D9-4E8F-B517-323CCF4B39FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9348478-7A08-4E5C-8355-D6C3A2BCA649}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9348478-7A08-4E5C-8355-D6C3A2BCA649}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9348478-7A08-4E5C-8355-D6C3A2BCA649}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9348478-7A08-4E5C-8355-D6C3A2BCA649}.Release|Any CPU.Build.0 = Release|Any CPU
+		{297B2A93-9B97-4B51-A6EC-52E064469EE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{297B2A93-9B97-4B51-A6EC-52E064469EE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{297B2A93-9B97-4B51-A6EC-52E064469EE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{297B2A93-9B97-4B51-A6EC-52E064469EE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34C0C4E7-7B47-4975-B968-31B498156010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34C0C4E7-7B47-4975-B968-31B498156010}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34C0C4E7-7B47-4975-B968-31B498156010}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34C0C4E7-7B47-4975-B968-31B498156010}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B49C2A50-D59C-4E68-858A-F464F30BA0EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B49C2A50-D59C-4E68-858A-F464F30BA0EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B49C2A50-D59C-4E68-858A-F464F30BA0EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B49C2A50-D59C-4E68-858A-F464F30BA0EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
