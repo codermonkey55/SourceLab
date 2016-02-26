@@ -1,4 +1,4 @@
-# SWiftTier - A sample Multi-Tenancy management suite.
+# SwiftTier - A sample Multi-Tenancy management suite.
 
 ## Summary
 
