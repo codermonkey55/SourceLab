@@ -1,9 +1,5 @@
-﻿using Microsoft.Data.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFCoreSample.Database
 {
@@ -30,6 +26,14 @@ namespace EFCoreSample.Database
             var eb = new TEntityBuilder();
 
             _mb.Entity(eb.EntityType, eb.Build);
+
+            return this;
+        }
+
+        public IEntityConfigurations Add<TEntity>(IEntityBuilder<TEntity> eb)
+    where TEntity : class
+        {
+            _mb.Entity<TEntity>(eb.Build);
 
             return this;
         }

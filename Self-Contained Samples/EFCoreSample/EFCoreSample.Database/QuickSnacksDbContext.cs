@@ -1,10 +1,11 @@
 ﻿using EFCoreSample.Entities;
 using EFCoreSample.Database.Extensions;
-using Microsoft.Data.Entity;
-using Microsoft.Data.Entity.Metadata.Builders;
 using System;
 using System.Configuration;
 using System.Linq;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EFCoreSample.Database
 {
@@ -48,6 +49,7 @@ namespace EFCoreSample.Database
             ConfigureBrochure(builder);
 
             //--> Via Custom Extension Method model configuration or finally...
+            builder.AddConfiguration<Brochure, BrochureConfiguration>();
             builder.AddConfiguration<BrochureConfiguration>();
             builder.AddConfiguration(new BrochureConfiguration());
 

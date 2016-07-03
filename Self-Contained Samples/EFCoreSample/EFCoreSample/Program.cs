@@ -1,12 +1,9 @@
-﻿using EFCoreSample.Database;
-using EFCoreSample.Entities;
-using EFCoreSample.Database.Extensions;
-using Microsoft.Data.Entity;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using EFCoreSample.Database;
+using EFCoreSample.Database.Extensions;
+using EFCoreSample.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace EFCoreSample
 {

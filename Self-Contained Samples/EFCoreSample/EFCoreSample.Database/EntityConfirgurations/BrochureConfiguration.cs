@@ -1,7 +1,7 @@
-﻿using EFCoreSample.Entities;
-using System;
-using Microsoft.Data.Entity.Metadata.Builders;
-using Microsoft.Data.Entity;
+﻿using System;
+using EFCoreSample.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EFCoreSample.Database
 {

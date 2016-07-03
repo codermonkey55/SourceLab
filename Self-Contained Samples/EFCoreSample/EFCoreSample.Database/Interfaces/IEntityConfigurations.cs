@@ -1,11 +1,4 @@
-﻿using Microsoft.Data.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EFCoreSample.Database
+﻿namespace EFCoreSample.Database
 {
     public interface IEntityConfigurations
     {
@@ -14,6 +7,8 @@ namespace EFCoreSample.Database
             where TEntityConfiguration : IEntityBuilder<TEntity>, new();
 
         IEntityConfigurations Add<TEntityConfiguration>() where TEntityConfiguration : IEntityBuilder, new();
+
+        IEntityConfigurations Add<TEntity>(IEntityBuilder<TEntity> ec) where TEntity : class;
 
         IEntityConfigurations Add(IEntityBuilder ec);
 

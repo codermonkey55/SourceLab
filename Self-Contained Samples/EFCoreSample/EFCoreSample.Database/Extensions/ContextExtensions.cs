@@ -1,11 +1,7 @@
-﻿using EFCoreSample.Entities;
-using Microsoft.Data.Entity;
-using Microsoft.Data.Entity.ChangeTracking;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using EFCoreSample.Entities;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace EFCoreSample.Database.Extensions
 {
