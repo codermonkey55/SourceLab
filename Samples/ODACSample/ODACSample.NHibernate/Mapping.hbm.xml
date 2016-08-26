@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" auto-import="true">
+
+  <sql-query name="GetAccountsForCustomer">
+    <return class="our.project.Account, our.assembly"  />
+    { call SP_WEB_ACCOUNTS(:customer) }
+  </sql-query>
+
+</hibernate-mapping>
