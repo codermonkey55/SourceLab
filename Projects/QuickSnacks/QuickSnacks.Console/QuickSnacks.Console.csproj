@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>QuickSnacks.Console.EF.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -72,6 +75,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\QuickSnacks.Data.EF\QuickSnacks.Data.EF.csproj">
+      <Project>{F016451B-6C70-419B-A42B-997183F2DD73}</Project>
+      <Name>QuickSnacks.Data.EF</Name>
+    </ProjectReference>
     <ProjectReference Include="..\QuickSnacks.Data.NHibernate\QuickSnacks.Data.NHibernate.csproj">
       <Project>{f3bbdac5-0ad2-4f78-a987-758583bf7e00}</Project>
       <Name>QuickSnacks.Data.NHibernate</Name>

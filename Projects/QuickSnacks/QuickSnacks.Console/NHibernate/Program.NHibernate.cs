@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
+using NHibernate.Linq;
 using QuickSnacks.Data.NHibernate.Database;
 using QuickSnacks.Data.NHibernate.Entities;
-using NHibernate.Linq;
-using NHibernate;
 
-namespace QuickSnacks.Console
+namespace QuickSnacks.Console.NHibernate
 {
     class Program
     {
@@ -30,7 +25,7 @@ namespace QuickSnacks.Console
             var brochure = session.Get<Brochure>(1);
             var fingerItem = session.Query<FingerItem>().FirstOrDefault();
             var menu = session.Query<Menu>().FirstOrDefault();
-            var menuItem = session.Query<MenuItem>().FirstOrDefault();           
+            var menuItem = session.Query<MenuItem>().FirstOrDefault();
             var inActive_token = session.Get<Token>(2);
             var active_token = session.Get<Token>(3);
             var user = session.Query<User>().FirstOrDefault();

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using QuickSnacks.Data.EF.Entities;
 
-namespace QuickSnacks.Console
+namespace QuickSnacks.Console.EF
 {
     public class SeedData
     {
