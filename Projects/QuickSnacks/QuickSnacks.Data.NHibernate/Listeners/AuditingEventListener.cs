@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NHibernate.Event;
 using NHibernate.Persister.Entity;
 using QuickSnacks.Data.NHibernate.Entities;
 
-namespace QuickSnacks.Data.NHibernate.Utilities
+namespace QuickSnacks.Data.NHibernate.Listeners
 {
     public class AuditingEventListener : IPreInsertEventListener, IPreUpdateEventListener
     {
@@ -34,11 +30,11 @@ namespace QuickSnacks.Data.NHibernate.Utilities
 
             switch (writeEvent)
             {
-                case"Insert":
+                case "Insert":
                     auditableEntity.CreateDate = DateTime.UtcNow;
                     break;
 
-                case"Update":
+                case "Update":
                     auditableEntity.EditDate = DateTime.UtcNow;
                     break;
             }

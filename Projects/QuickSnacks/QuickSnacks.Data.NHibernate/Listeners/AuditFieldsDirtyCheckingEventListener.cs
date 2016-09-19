@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NHibernate.Event;
 using NHibernate.Event.Default;
 using QuickSnacks.Data.NHibernate.Entities;
 
-namespace QuickSnacks.Data.NHibernate.Utilities
+namespace QuickSnacks.Data.NHibernate.Listeners
 {
     public class AuditFieldsDirtyCheckingEventListener : DefaultFlushEntityEventListener
     {
