@@ -56,15 +56,20 @@
     <Compile Include="Conventions\CollectionConvention.cs" />
     <Compile Include="Conventions\ComponentConvention.cs" />
     <Compile Include="Conventions\PropertyConvention.cs" />
+    <Compile Include="Entities\Base\Entity.cs" />
+    <Compile Include="Listeners\FlushEntityAuditEventListener.cs" />
     <Compile Include="Database\IExtendedSession.cs" />
     <Compile Include="Database\ExtendedSession.cs" />
+    <Compile Include="Interceptors\PreCommitInterceptor.cs" />
+    <Compile Include="Listeners\PrePersistAuditEventListener.cs" />
     <Compile Include="Database\SessionFactoryBuilder.cs" />
     <Compile Include="Database\SessionManager.cs" />
     <Compile Include="Conventions\TableNameConvention.cs" />
+    <Compile Include="Interceptors\TrackingInterceptor.cs" />
     <Compile Include="Entities\Brochure.cs" />
     <Compile Include="Components\AuditInfo.cs" />
     <Compile Include="Entities\Base\AuditableEntity.cs" />
-    <Compile Include="Entities\Base\Entity.cs" />
+    <Compile Include="Entities\Base\Entity%27T.cs" />
     <Compile Include="Entities\FingerItem.cs" />
     <Compile Include="FluentMappings\BaseMaps\CommonMap.cs" />
     <Compile Include="FluentMappings\BaseMaps\AuditMap.cs" />
@@ -81,8 +86,8 @@
     <Compile Include="FluentMappings\ClassMaps\TokenMap.cs" />
     <Compile Include="FluentMappings\ClassMaps\UserMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities\AuditingEventListener.cs" />
-    <Compile Include="Utilities\AuditFieldsDirtyCheckingEventListener.cs" />
+    <Compile Include="Listeners\AuditingEventListener.cs" />
+    <Compile Include="Listeners\AuditFieldsDirtyCheckingEventListener.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
