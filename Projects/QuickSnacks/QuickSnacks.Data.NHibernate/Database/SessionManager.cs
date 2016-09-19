@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NHibernate;
 
 namespace QuickSnacks.Data.NHibernate.Database
@@ -12,7 +9,7 @@ namespace QuickSnacks.Data.NHibernate.Database
     {
         private static ISessionFactory _sessionFactory;
 
-        private static Dictionary<string, object> _keyedSessions;
+        private static readonly Dictionary<string, object> KeyedSessions;
 
         private static ISessionFactory SessionFactory
         {
@@ -28,12 +25,12 @@ namespace QuickSnacks.Data.NHibernate.Database
 
         static SessionManager()
         {
-            _keyedSessions = new Dictionary<string, object>();
+            KeyedSessions = new Dictionary<string, object>();
         }
 
-        public SessionManager(ISessionFactory sessionFactory)
+        protected SessionManager(ISessionFactory sessionFactory)
         {
-
+            _sessionFactory = sessionFactory;
         }
 
 
@@ -75,7 +72,7 @@ namespace QuickSnacks.Data.NHibernate.Database
         {
             IExtendedSession extSession = new ExtendedSession(SessionFactory.OpenSession(dbconnection));
 
-            if(beginTransaction) extSession.Session.BeginTransaction();
+            if (beginTransaction) extSession.Session.BeginTransaction();
 
             return extSession;
         }
@@ -85,7 +82,7 @@ namespace QuickSnacks.Data.NHibernate.Database
         {
             string sessionKey = GenerateSessionKey();
 
-            _keyedSessions.Add(sessionKey, session);
+            KeyedSessions.Add(sessionKey, session);
 
             return sessionKey;
         }
@@ -94,9 +91,9 @@ namespace QuickSnacks.Data.NHibernate.Database
         {
             TSession session = null;
 
-            if(_keyedSessions.ContainsKey(sessionKey))
+            if (KeyedSessions.ContainsKey(sessionKey))
             {
-                session = _keyedSessions[sessionKey] as TSession;
+                session = KeyedSessions[sessionKey] as TSession;
             }
 
             return session;

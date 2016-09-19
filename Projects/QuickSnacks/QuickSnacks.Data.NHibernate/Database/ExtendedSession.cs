@@ -1,39 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NHibernate;
-using NHibernate.Impl;
 
 namespace QuickSnacks.Data.NHibernate.Database
 {
     public class ExtendedSession : IExtendedSession, IDisposable
     {
-        protected readonly ISession _internalSession;
+        protected readonly ISession InternalSession;
 
-        protected readonly ISet<object> _internalItems;
+        protected readonly ISet<object> InternalItems;
 
         public ExtendedSession(ISession session)
         {
-            _internalSession = session;
+            InternalSession = session;
 
-            _internalItems = new HashSet<object>();
+            InternalItems = new HashSet<object>();
         }
 
         public ISet<object> Items
         {
-            get { return _internalItems; }
+            get { return InternalItems; }
         }
 
         public ISession Session
         {
-            get { return _internalSession; }
+            get { return InternalSession; }
         }
 
         public ITransaction Transaction
         {
-            get { return _internalSession.Transaction; }
+            get { return InternalSession.Transaction; }
         }
 
         public void Dispose()
@@ -47,11 +43,11 @@ namespace QuickSnacks.Data.NHibernate.Database
         {
             if (disposing)
             {
-                if (_internalSession != null)
-                    _internalSession.Dispose();
+                if (InternalSession != null)
+                    InternalSession.Dispose();
 
-                if (_internalItems != null) 
-                    _internalItems.GetEnumerator().Dispose();
+                if (InternalItems != null)
+                    InternalItems.GetEnumerator().Dispose();
             }
         }
     }
