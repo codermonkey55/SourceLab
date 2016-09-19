@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace QuickSnacks.Data.NHibernate.Entities.Base
+namespace QuickSnacks.Data.NHibernate.Entities
 {
-    public abstract class Entity<TKey> : AuditableEntity where TKey : struct
+    internal class Entity
     {
-        public virtual TKey Id { get; protected set; }
+        public DateTime Created { get; set; }
+        public object CreatedBy { get; set; }
+        public DateTime Modified { get; set; }
+        public object ModifiedBy { get; set; }
     }
 }
