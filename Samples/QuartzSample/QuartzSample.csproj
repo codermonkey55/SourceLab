@@ -46,6 +46,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -54,8 +55,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factories\ExampleJobFactory.cs" />
     <Compile Include="Jobs\ExampleInteruptableJob.cs" />
     <Compile Include="Jobs\ExampleJob.cs" />
+    <Compile Include="Jobs\IRetryableJob.cs" />
+    <Compile Include="Listeners\ExampleJobListener.cs" />
+    <Compile Include="Listeners\RetryableJobListener.cs" />
+    <Compile Include="Triggers\ExampleTrigger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -66,9 +72,7 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Listeners\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
