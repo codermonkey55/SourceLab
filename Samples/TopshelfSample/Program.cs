@@ -1,6 +1,6 @@
-﻿using Quartz;
-using System;
+﻿using System;
 using System.Timers;
+using Quartz;
 using Topshelf;
 using Topshelf.Quartz;
 using TopshelfSample.Service;
@@ -48,7 +48,7 @@ namespace TopshelfSample
                         q.WithJob(() =>
                             JobBuilder.Create<ExampleJob>().Build())
                         .AddTrigger(() =>
-                            TriggerBuilder.Create()
+                            TriggerBuilder.Create().WithIdentity(new TriggerKey("Name", "Group"))
                                 .WithSimpleSchedule(builder => builder
                                     .WithIntervalInSeconds(20)
                                     .RepeatForever())
@@ -59,7 +59,7 @@ namespace TopshelfSample
                         q.WithJob(() =>
                             JobBuilder.Create<ExampleJob>().Build())
                         .AddTrigger(() =>
-                            TriggerBuilder.Create()
+                            TriggerBuilder.Create().WithIdentity(new TriggerKey("Name", "Group"))
                                 .WithSimpleSchedule(builder => builder
                                     .WithIntervalInSeconds(60)
                                     .RepeatForever())

@@ -179,6 +179,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DependencyInjection\Stashbox\StashboxControllerFactory.cs" />
     <Compile Include="DependencyInjection\Stashbox\StashboxDependencyResolver.cs" />
+    <Compile Include="DependencyInjection\Stashbox\StashboxRequestScopeFactory.cs" />
+    <Compile Include="DependencyInjection\Stashbox\StashboxRequestScopeModule.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
