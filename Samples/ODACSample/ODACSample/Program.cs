@@ -1,11 +1,17 @@
-﻿using NHibernate.Transform;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using Insight.Database;
+using NHibernate.Transform;
+using ODAC_Sample_FluentDAO;
+using ODAC_Sample_InsightDatabase;
 using ODAC_Sample_NHibernate;
 //using Oracle.ManagedDataAccess.Client;
 //using Oracle.ManagedDataAccess.Types;
 using ODAC_Sample_NHibernate.Entities.Hr;
 using Oracle.DataAccess.Client;
 using Oracle.DataAccess.Types;
-using System;
 
 namespace ODAC_Sample
 {
@@ -13,12 +19,46 @@ namespace ODAC_Sample
     {
         static void Main(string[] args)
         {
-            NHibernate_Example();
+            //NHibernate_Example();
 
             //ADO_NET_Example();
 
+            //FluentDAO_Example();
+
+            //InsightDatabase_Example();
+
             Console.WriteLine();
             Console.WriteLine("Press 'Enter' to continue");
+            Console.ReadLine();
+        }
+
+        /// <summary>
+        /// <see cref="https://github.com/jonwagner/Insight.Database"/>
+        /// </summary>
+        static void InsightDatabase_Example()
+        {
+            InsightDbProvider.RegisterSqlProvider();
+
+            var conn = new SqlConnection(@"Data Source=www.machinejar.com\DEVSQL02;Initial Catalog=AdventureWorks2014;Persist Security Info=True;User ID=db_user;Password=***");
+
+            var productAddresses = conn.QuerySql<dynamic>("select top 10 *  from Person.Address");
+
+            Console.WriteLine(productAddresses.First().AddressLine1);
+
+            Console.ReadLine();
+        }
+
+        /// <summary>
+        /// <see cref="https://github.com/leadnt/FluentDAO"/>
+        /// </summary>
+        static void FluentDAO_Example()
+        {
+            var context = DbContextConfiguration.GetContextUsing(@"Data Source=www.machinejar.com\DEVSQL02;Initial Catalog=AdventureWorks2014;Persist Security Info=True;User ID=db_user;Password=***");
+
+            List<dynamic> productAddresses = context.Sql("select top 10 *  from Person.Address").QueryMany<dynamic>();
+
+            Console.WriteLine(productAddresses.First().AddressLine1);
+
             Console.ReadLine();
         }
 

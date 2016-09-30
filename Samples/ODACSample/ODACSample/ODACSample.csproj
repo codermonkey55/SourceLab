@@ -71,10 +71,16 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentDAO">
+      <HintPath>..\Binaries\net45\FluentDAO.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="Insight.Database">
+      <HintPath>..\Binaries\net45\Insight.Database.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <HintPath>..\packages\NHibernate.3.3.1.4000\lib\Net35\NHibernate.dll</HintPath>
@@ -104,6 +110,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ODACSample.FluentDAO\ODACSample.FluentDAO.csproj">
+      <Project>{7A0A3695-C2A6-42FC-85FD-D006E2734295}</Project>
+      <Name>ODACSample.FluentDAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ODACSample.InsightDatabase\ODACSample.InsightDatabase.csproj">
+      <Project>{19EBB7C4-E55B-4486-A5CE-861945F8A336}</Project>
+      <Name>ODACSample.InsightDatabase</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ODACSample.NHibernate\ODACSample.NHibernate.csproj">
       <Project>{df5fb5e8-d3f1-454d-9700-c57f94b41eba}</Project>
       <Name>ODACSample.NHibernate</Name>
