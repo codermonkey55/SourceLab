@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using Insight.Database;
-using NHibernate.Transform;
 using ODAC_Sample_FluentDAO;
 using ODAC_Sample_InsightDatabase;
 using ODAC_Sample_NHibernate;
@@ -19,7 +18,7 @@ namespace ODAC_Sample
     {
         static void Main(string[] args)
         {
-            //NHibernate_Example();
+            NHibernate_Example();
 
             //ADO_NET_Example();
 
@@ -65,7 +64,8 @@ namespace ODAC_Sample
         static void NHibernate_Example()
         {
             //var cs = "User Id=hr; Password=hr;data source=HR_TNS;";
-            var cs = @"Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=xe)));User Id=db_user;Password=dbuser123;";
+            //var cs = @"Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=xe)));User Id=db_user;Password=dbuser123;";
+            var cs = "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=www.machinejar.com)(PORT=1522)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=devorc02)));User Id=hr;Password=hr;";
 
             var nhconfig = NHibernateConfig.Instance(cs);
 
@@ -73,22 +73,27 @@ namespace ODAC_Sample
 
             var session = nhconfig.SessionFactory.OpenSession();
 
-            var query = session.CreateSQLQuery("exec HR_DEPTPERCOUNTRY :CNTR_CD");
+            //var query = session.CreateSQLQuery("CALL HR_DEPTPERCOUNTRY (:RS_CURSOR, :CNTR_CD)");
 
-            //var query = session.GetNamedQuery("exec HR_DEPTPERCOUNTRY :CNTR_CD");
+            var query = session.GetNamedQuery("HR_DEPTPERCOUNTRY");
 
-            query.SetParameter("CNTR_CD", "US");
+            query.SetString("CNTR_CD", "UK");
 
-            query.AddEntity(typeof(HumanResourcesInfo));
+            //query.AddEntity(typeof(HumanResourcesInfo));
 
-            query.SetResultTransformer(Transformers.AliasToBean<HumanResourcesInfo>());
+            //query.SetResultTransformer(Transformers.AliasToBean<HumanResourcesInfo>());
 
-            var result = query.List<HumanResourcesInfo>();
+            var results = query.List<HumanResourcesInfo>();
+
+            foreach (var result in results)
+            {
+                Console.WriteLine("Dept Name: {0} | Address: {1}, | Country: {2}", result.Department, result.Address, result.Country);
+            }
         }
 
         static void ADO_NET_Example()
         {
-            var cs = "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=xe)));User Id=hr;Password=\"hr\";";
+            var cs = "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=www.machinejar.com)(PORT=1522)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=devorc02)));User Id=hr;Password=hr;";
 
             OracleConnection con = new OracleConnection();
             con.ConnectionString = cs;
@@ -100,7 +105,7 @@ namespace ODAC_Sample
 
             OracleParameter orcParam = new OracleParameter("CNTR_CD", OracleDbType.Varchar2);
             orcParam.Size = 50;
-            orcParam.Value = "US";
+            orcParam.Value = "UK";
             orcParam.Direction = System.Data.ParameterDirection.Input;
             cmd.Parameters.Add(orcParam);
 

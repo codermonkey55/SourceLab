@@ -1,8 +1,8 @@
-﻿using FluentNHibernate.Cfg;
+﻿using System;
+using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using ODAC_Sample_NHibernate.Mappings;
-using System;
 
 namespace ODAC_Sample_NHibernate
 {
@@ -56,6 +56,7 @@ namespace ODAC_Sample_NHibernate
                 //});
 
                 config.Mappings(m => m.FluentMappings.AddFromAssemblyOf<HrInfoMap>());
+                config.Mappings(m => m.HbmMappings.AddFromAssemblyOf<HrInfoMap>());
             }
 
             catch (Exception ex)
