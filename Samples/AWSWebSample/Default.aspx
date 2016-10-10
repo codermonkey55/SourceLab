@@ -7,7 +7,6 @@
     <title>My AWS Enabled Application - AWSWebSample</title>
     <link rel="stylesheet" href="styles/styles.css" type="text/css" media="screen" charset="utf-8" />
 </head>
-<html>
 <body>
     <div id="content" class="container">
         <div class="section grid grid5 s3">
