@@ -1,10 +1,10 @@
-using System;
-using System.Linq;
-using System.Web.Http.Controllers;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
-using CodeLabs.Web.WebForms.IoC_Integration.Controllers;
+using DIWebAppSample.Controllers;
+using System;
+using System.Linq;
+using System.Web.Http.Controllers;
 
 namespace CodeLabs.Web.WebForms.IoC_Integration.IoC_Core.CastleWindsor.Installers
 {

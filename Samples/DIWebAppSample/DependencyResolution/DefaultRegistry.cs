@@ -15,19 +15,22 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace DIWebAppSample.DependencyResolution {
-    using StructureMap.Configuration.DSL;
-    using StructureMap.Graph;
-	
-    public class DefaultRegistry : Registry {
+namespace DIWebAppSample.DependencyResolution
+{
+    using StructureMap;
+
+    public class DefaultRegistry : Registry
+    {
         #region Constructors and Destructors
 
-        public DefaultRegistry() {
+        public DefaultRegistry()
+        {
             Scan(
-                scan => {
+                scan =>
+                {
                     scan.TheCallingAssembly();
                     scan.WithDefaultConventions();
-					scan.With(new ControllerConvention());
+                    scan.With(new ControllerConvention());
                 });
             //For<IExample>().Use<Example>();
         }

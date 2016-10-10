@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CodeLabs.Web.WebForms.IoC_Integration.Services;
+﻿using DIWebAppSample.Services;
 using Grace.DependencyInjection;
 
 namespace CodeLabs.Web.WebForms.IoC_Integration.IoC_Core.Grace

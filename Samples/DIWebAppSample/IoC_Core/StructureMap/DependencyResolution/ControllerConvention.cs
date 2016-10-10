@@ -15,12 +15,14 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using System;
-using System.Web.Mvc;
-using StructureMap.Configuration.DSL;
+using StructureMap;
 using StructureMap.Graph;
+using StructureMap.Graph.Scanning;
 using StructureMap.Pipeline;
 using StructureMap.TypeRules;
+using System;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace CodeLabs.Web.WebForms.IoC_Integration.IoC_Core.StructureMap.DependencyResolution
 {
@@ -30,8 +32,21 @@ namespace CodeLabs.Web.WebForms.IoC_Integration.IoC_Core.StructureMap.Dependency
 
         public void Process(Type type, Registry registry)
         {
-            if (type.CanBeCastTo<Controller>() && !type.IsAbstract) {
+            if (type.CanBeCastTo<Controller>() && !type.IsAbstract)
+            {
                 registry.For(type).LifecycleIs(new UniquePerRequestLifecycle());
+            }
+        }
+
+        public void ScanTypes(TypeSet types, Registry registry)
+        {
+            var allTypes = types.AllTypes().ToArray();
+            foreach (var type in allTypes)
+            {
+                if (type.CanBeCastTo<Controller>() && !type.IsAbstract)
+                {
+                    registry.For(type).LifecycleIs(new UniquePerRequestLifecycle());
+                }
             }
         }
 

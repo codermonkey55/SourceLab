@@ -1,6 +1,4 @@
-﻿using System.Web.Mvc;
-using Autofac;
-using Autofac.Integration.Mvc;
+﻿using Autofac;
 using CodeLabs.Web.WebForms.IoC_Integration.IoC_Core.Autofac;
 using Owin;
 

@@ -1,14 +1,14 @@
-﻿using System.Web.Http;
-using System.Web.Http.Controllers;
-using System.Web.Http.Dispatcher;
-using System.Web.Http.ModelBinding;
-using System.Web.Mvc;
-using Castle.Core.Logging;
+﻿using Castle.Core.Logging;
 using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using CodeLabs.Web.Mvc5.IoC_Integration.IoC_Core.CastleWindsor.Plumbing;
-using CodeLabs.Web.WebForms.IoC_Integration.Plumbing;
+using CodeLabs.Web.WebForms.IoC_Integration.IoC_Core.CastleWindsor.Plumbing;
+using System.Web.Http;
+using System.Web.Http.Controllers;
+using System.Web.Http.Dispatcher;
+using System.Web.Http.ModelBinding;
+using System.Web.Mvc;
 
 namespace CodeLabs.Web.WebForms.IoC_Integration.IoC_Core.CastleWindsor.Installers
 {

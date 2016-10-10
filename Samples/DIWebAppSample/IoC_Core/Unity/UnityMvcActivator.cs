@@ -1,10 +1,10 @@
+using CodeLabs.Web.Mvc5.IoC_Integration.IoC_Core.Unity;
+using Microsoft.Practices.Unity;
+using Microsoft.Practices.Unity.Mvc;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
-using CodeLabs.Web.Mvc5.IoC_Integration.IoC_Core.Unity;
-using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.Mvc;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(CodeLabs.Web.WebForms.IoC_Integration.IoC_Core.Unity.UnityWebActivator), "PreStart")]
 [assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(CodeLabs.Web.WebForms.IoC_Integration.IoC_Core.Unity.UnityWebActivator), "Shutdown")]
@@ -43,7 +43,7 @@ namespace CodeLabs.Web.WebForms.IoC_Integration.IoC_Core.Unity
             // Uncomment if you want to use PerRequestLifetimeManager
             Microsoft.Web.Infrastructure.DynamicModuleHelper.DynamicModuleUtility.RegisterModule(typeof(UnityPerRequestHttpModule));
 
-            container.RegisterType(typeof(Controllers.HomeController));
+            container.RegisterType(typeof(DIWebAppSample.Controllers.HomeController));
 
             var factory = new UnityHttpControllerFactory(container);
 

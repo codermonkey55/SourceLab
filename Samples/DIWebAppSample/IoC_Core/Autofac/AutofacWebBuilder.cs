@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Mvc;
-using Autofac;
+﻿using Autofac;
 using Autofac.Integration.Mvc;
-using CodeLabs.Web.WebForms.IoC_Integration;
+using DIWebAppSample;
+using System.Web.Mvc;
 
 namespace CodeLabs.Web.WebForms.IoC_Integration.IoC_Core.Autofac
 {

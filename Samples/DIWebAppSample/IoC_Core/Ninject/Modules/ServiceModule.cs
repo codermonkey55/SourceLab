@@ -1,4 +1,4 @@
-using CodeLabs.Web.WebForms.IoC_Integration.Services;
+using DIWebAppSample.Services;
 using Ninject.Modules;
 using Ninject.Web.Common;
 

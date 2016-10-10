@@ -1,7 +1,7 @@
-﻿using System.Reflection;
-using CodeLabs.Web.WebForms.IoC_Integration.Services;
+﻿using DIWebAppSample.Services;
 using SimpleInjector;
 using SimpleInjector.Integration.Web;
+using System.Reflection;
 
 namespace CodeLabs.Web.WebForms.IoC_Integration.IoC_Core.SimpleInjector
 {
