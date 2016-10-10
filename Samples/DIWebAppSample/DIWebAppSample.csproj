@@ -364,33 +364,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Data\App_Start\BundleConfig.cs" />
-    <Compile Include="App_Data\App_Start\FilterConfig.cs" />
-    <Compile Include="App_Data\App_Start\IdentityConfig.cs" />
-    <Compile Include="App_Data\App_Start\RouteConfig.cs" />
-    <Compile Include="App_Data\App_Start\Startup.Auth.cs" />
-    <Compile Include="App_Data\App_Start\WebApiConfig.cs" />
-    <Compile Include="App_Start\ContainerBootstrapper.cs" />
-    <Compile Include="App_Start\DependencyConfig.cs" />
-    <Compile Include="App_Start\NinjectWebCommon.cs" />
-    <Compile Include="App_Start\SimpleInjectorInitializer.cs" />
-    <Compile Include="App_Start\SimpleInjectorWebApiInitializer.cs" />
-    <Compile Include="App_Start\StructuremapMvc.cs" />
-    <Compile Include="App_Start\UnityConfig.cs" />
-    <Compile Include="App_Start\UnityMvcActivator.cs" />
-    <Compile Include="App_Start\WindsorActivator.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="DependencyResolution\ControllerConvention.cs" />
-    <Compile Include="DependencyResolution\DefaultRegistry.cs" />
-    <Compile Include="DependencyResolution\IoC.cs" />
-    <Compile Include="DependencyResolution\StructureMapDependencyScope.cs" />
-    <Compile Include="DependencyResolution\StructureMapScopeModule.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Installers\ControllersInstaller.cs" />
     <Compile Include="IoC_Configs\AutofacConfig.cs" />
     <Compile Include="IoC_Configs\DryIocConfig.cs" />
     <Compile Include="IoC_Configs\DynamoConfig.cs" />
@@ -415,6 +400,15 @@
     <Compile Include="IoC_Core\CastleWindsor\Resolver\WindsorDependcyResolver.cs" />
     <Compile Include="IoC_Core\CastleWindsor\Resolver\WindsorHttpDependcyResolver.cs" />
     <Compile Include="IoC_Core\CastleWindsor\WindsorActivator.cs" />
+    <Compile Include="IoC_Core\DryIoc\Extensions\DryIocExtensions.cs" />
+    <Compile Include="IoC_Core\DryIoc\Mvc\DryIocDependencyResolver.cs" />
+    <Compile Include="IoC_Core\DryIoc\Mvc\DryIocExtensions.cs" />
+    <Compile Include="IoC_Core\DryIoc\Mvc\DryIocFilterAttributeFilterProvider.cs" />
+    <Compile Include="IoC_Core\DryIoc\Mvc\FilterProvider.cs" />
+    <Compile Include="IoC_Core\DryIoc\WebApi\DryIocDependencyResolver.cs" />
+    <Compile Include="IoC_Core\DryIoc\WebApi\DryIocExtensions.cs" />
+    <Compile Include="IoC_Core\DryIoc\DryIocDependencyConfiguration.cs" />
+    <Compile Include="IoC_Core\DryIoc\Web\DryIocWebHttpModule.cs" />
     <Compile Include="IoC_Core\Dynamo.IoC\DynamoDependencyProvider.cs" />
     <Compile Include="IoC_Core\Dynamo.IoC\DynamoRegistration.cs" />
     <Compile Include="IoC_Core\Grace\GraceDependencyCatalog.cs" />
@@ -444,7 +438,6 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Plumbing\WindsorControllerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BrowserConfig\BrowserConfigService.cs" />
     <Compile Include="Services\Cache\CacheService.cs" />
@@ -520,7 +513,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="IoC_Core\DryIoc\" />
+    <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

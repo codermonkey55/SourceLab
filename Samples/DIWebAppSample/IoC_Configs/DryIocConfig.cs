@@ -1,13 +1,14 @@
-using CodeLabs.Web.Mvc5.IoC_Integration.IoC_Core.Dynamo.IoC;
+using DIWebAppSample.IoC_Core.DryIoc;
+using DryIoc;
 using Owin;
 
 namespace CodeLabs.Web.Mvc5.IoC_Integration.IoC_Configs
 {
     internal static class DryIocConfig
     {
-        private static Dynamo.Ioc.IIocContainer ConfigureContainer()
+        private static IContainer ConfigureContainer()
         {
-            var container = DynamoDependencyProvider.GetIoCContainer();
+            var container = DryIocDependencyConfiguration.ConfigureContainer();
 
             return container;
         }

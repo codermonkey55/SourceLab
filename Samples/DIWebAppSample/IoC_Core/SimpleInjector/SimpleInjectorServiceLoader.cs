@@ -1,32 +1,62 @@
 ﻿using DIWebAppSample.Services;
 using SimpleInjector;
 using SimpleInjector.Integration.Web;
+using SimpleInjector.Integration.Web.Mvc;
+using SimpleInjector.Integration.WebApi;
 using System.Reflection;
+using System.Web.Http;
+using System.Web.Mvc;
 
 namespace CodeLabs.Web.WebForms.IoC_Integration.IoC_Core.SimpleInjector
 {
     public class SimpleInjectorServiceLoader
     {
-        private Container Container { get; set; }
+        private Container MvcContainer { get; set; }
+
+        private Container ApiContainer { get; set; }
 
         /// <summary>Initialize the container and register it as MVC3 Dependency Resolver.</summary>
-        public Container InitializeContainer()
+        public Container InitializeMvcContainer()
         {
-            Container = new Container();
+            MvcContainer = new Container();
 
-            Container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
+            MvcContainer.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
 
-            Container.Options.AllowOverridingRegistrations = true;
+            MvcContainer.Options.AllowOverridingRegistrations = true;
 
-            Container.Options.ResolveUnregisteredCollections = true;
+            MvcContainer.Options.ResolveUnregisteredCollections = true;
 
-            LoadConfigurations(Container);
+            LoadConfigurations(MvcContainer);
 
-            Container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
+            MvcContainer.RegisterMvcControllers(Assembly.GetExecutingAssembly());
 
-            Container.Verify();
+            MvcContainer.Verify();
 
-            return Container;
+            DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(MvcContainer));
+
+            return MvcContainer;
+        }
+
+        public Container InitializeApiContainer()
+        {
+
+            ApiContainer = new Container();
+
+            ApiContainer.Options.DefaultScopedLifestyle = new WebApiRequestLifestyle();
+
+            ApiContainer.Options.AllowOverridingRegistrations = true;
+
+            ApiContainer.Options.ResolveUnregisteredCollections = true;
+
+            LoadConfigurations(ApiContainer);
+
+            ApiContainer.RegisterWebApiControllers(GlobalConfiguration.Configuration);
+
+            ApiContainer.Verify();
+
+            GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(ApiContainer);
+
+            return ApiContainer;
         }
 
         private void LoadConfigurations(Container container)
@@ -45,7 +75,8 @@ namespace CodeLabs.Web.WebForms.IoC_Integration.IoC_Core.SimpleInjector
 
         public void Dispose()
         {
-            Container.Dispose();
+            MvcContainer?.Dispose();
+            ApiContainer?.Dispose();
         }
     }
 }
