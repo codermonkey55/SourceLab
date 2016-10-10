@@ -32,7 +32,7 @@ namespace DIWebAppSample.IoC_Core.DryIoc
         public static IContainer ConfigureContainer()
         {
             container.SetupMvc(typeof(DryIocConfig).Assembly);
-            //-> Or Use the built-in with performs the following:
+            //-> Or Use the built-in extension which performs the following:
             //----> container = container.With(scopeContext: scopeContext);
             //----> container.RegisterMvcControllers(controllerAssemblies);
             //----> container.SetFilterAttributeFilterProvider(FilterProviders.Providers);
@@ -40,7 +40,7 @@ namespace DIWebAppSample.IoC_Core.DryIoc
             container.WithMvc(new[] { typeof(DryIocConfig).Assembly }, new HttpContextScopeContext());
 
             container.SetupWebApi(typeof(DryIocConfig).Assembly);
-            //-> Or Use the built-in with performs the following:
+            //-> Or Use the built-in extension which performs the following:
             //----> container = container.With(scopeContext: scopeContext ?? new AsyncExecutionFlowScopeContext());
             //----> container.RegisterWebApiControllers(config, controllerAssemblies);
             //----> container.SetFilterProvider(config.Services);
