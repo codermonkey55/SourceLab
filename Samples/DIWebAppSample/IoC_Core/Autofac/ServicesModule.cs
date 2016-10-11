@@ -5,11 +5,9 @@ namespace CodeLabs.Web.WebForms.IoC_Integration.IoC_Core.Autofac
 {
     public class ServicesModule : Module
     {
-        private readonly string _connStr;
-
-        public ServicesModule(string connString)
+        public ServicesModule()
         {
-            this._connStr = connString;
+
         }
         protected override void Load(ContainerBuilder builder)
         {

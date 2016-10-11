@@ -2,10 +2,11 @@
 using Autofac.Integration.Mvc;
 using DIWebAppSample;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace CodeLabs.Web.WebForms.IoC_Integration.IoC_Core.Autofac
 {
-    public class AutofacWebBuilder
+    public class AutofacMvcBuilder
     {
         internal static IContainer BuildRegistrations()
         {
@@ -24,7 +25,10 @@ namespace CodeLabs.Web.WebForms.IoC_Integration.IoC_Core.Autofac
             builder.RegisterModule<AutofacWebTypesModule>();
 
             // Register our custom dependencies
-            builder.RegisterModule(new ServicesModule("MVCWithAutofacServices"));
+            builder.RegisterModule(new ServicesModule());
+
+            // Register custom model binders
+            builder.RegisterType<RequestContextModelBinder>().AsModelBinderForTypes(typeof(RequestContext));
 
             var container = builder.Build();
 
@@ -33,5 +37,11 @@ namespace CodeLabs.Web.WebForms.IoC_Integration.IoC_Core.Autofac
 
             return container;
         }
+    }
+
+    [ModelBinder(typeof(RequestContext))]
+    internal class RequestContextModelBinder
+    {
+
     }
 }

@@ -1,26 +1,36 @@
 ﻿using Autofac;
 using CodeLabs.Web.WebForms.IoC_Integration.IoC_Core.Autofac;
 using Owin;
+using System.Web.Http;
 
 namespace CodeLabs.Web.WebForms.IoC_Integration.IoC_Configs
 {
     public class AutofacConfig
     {
-        private static IContainer ConfigureContainer()
+        private static IContainer ConfigureMvcContainer()
         {
-            return AutofacWebBuilder.BuildRegistrations();
+            return AutofacMvcBuilder.BuildRegistrations();
+        }
+
+        private static IContainer ConfigureWebApiContainer()
+        {
+            return AutofacWebApiBuilder.BuildRegistrations();
         }
 
         public static void Bootstrap()
         {
-            var container = ConfigureContainer();
+            var mvcContainer = ConfigureMvcContainer();
+
+            var webapiContainer = ConfigureWebApiContainer();
         }
 
         public static void Bootstrap(IAppBuilder app)
         {
-            var container = ConfigureContainer();
+            var mvcContainer = ConfigureMvcContainer();
 
-            app.UseAutofacMiddleware(container);
+            app.UseAutofacMiddleware(mvcContainer);
+
+            app.UseAutofacWebApi(GlobalConfiguration.Configuration);
 
             app.UseAutofacMvc();
         }
