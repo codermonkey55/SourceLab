@@ -140,7 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MediatRSample.Objects\MediatRSample.Objects.csproj">
-      <Project>{2C06A473-15C1-44CA-BB84-4704D3CCF8B6}</Project>
+      <Project>{2c06a473-15c1-44ca-bb84-4704d3ccf8b6}</Project>
       <Name>MediatRSample.Objects</Name>
     </ProjectReference>
   </ItemGroup>
