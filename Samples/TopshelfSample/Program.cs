@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Quartz;
+using System;
 using System.Timers;
-using Quartz;
 using Topshelf;
 using Topshelf.Quartz;
 using TopshelfSample.Service;
