@@ -1,5 +1,4 @@
-﻿using FluentNHibernate;
-using FluentNHibernate.Mapping;
+﻿using NHibernate.Persister.Entity;
 using QuickSnacks.Data.NHibernate.Entities;
 
 namespace QuickSnacks.Data.NHibernate.FluentMappings.ClassMaps
@@ -8,6 +7,15 @@ namespace QuickSnacks.Data.NHibernate.FluentMappings.ClassMaps
     {
         public MenuMap()
         {
+            this.LazyLoad();
+            this.Polymorphism.Implicit();
+            this.Cache.IncludeNonLazy();
+            this.SchemaAction.Validate();
+            this.OptimisticLock.Dirty();
+            this.HibernateMapping.DefaultLazy();
+
+            this.Persister(typeof(IEntityPersister).Name);
+
             this.Id(x => x.Id).Not.Nullable().Column("MenuId").GeneratedBy.Native();
             this.Map(x => x.Name).Length(50).Not.Nullable();
             this.Map(x => x.Description).Length(250).Nullable();
