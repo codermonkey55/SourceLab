@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="QuickSnacks.Data.NHibernate" namespace="QuickSnacks.Data.NHibernate.Entities">
+  <class name="Brochure">
+    <id name="Id" generator="hilo"/>
+    <property name="Title" />
+    <property name="Description" />
+    <set name="string">
+      <key column="" foreign-key="">
+      </key>
+      <element column="" type="">
+      </element>
+    </set>
+  </class>
+</hibernate-mapping>
