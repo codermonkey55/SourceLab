@@ -1,7 +1,7 @@
-﻿using System;
+﻿using NHibernate;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using NHibernate;
 
 namespace QuickSnacks.Data.NHibernate.Database
 {
@@ -49,6 +49,7 @@ namespace QuickSnacks.Data.NHibernate.Database
             return session;
         }
 
+
         public static ISession OpenSession(bool beginTransaction, IDbConnection dbconnection)
         {
             ISession session = SessionFactory.OpenSession(dbconnection);
@@ -56,6 +57,26 @@ namespace QuickSnacks.Data.NHibernate.Database
             if (beginTransaction) session.BeginTransaction();
 
             return session;
+        }
+
+
+        public static IStatelessSession OpenStatelessSession(bool beginTransaction)
+        {
+            IStatelessSession statelessSession = SessionFactory.OpenStatelessSession();
+
+            if (beginTransaction) statelessSession.BeginTransaction();
+
+            return statelessSession;
+        }
+
+
+        public static IStatelessSession OpenStatelessSession(bool beginTransaction, IDbConnection dbconnection)
+        {
+            IStatelessSession statelessSession = SessionFactory.OpenStatelessSession(dbconnection);
+
+            if (beginTransaction) statelessSession.BeginTransaction();
+
+            return statelessSession;
         }
 
 
