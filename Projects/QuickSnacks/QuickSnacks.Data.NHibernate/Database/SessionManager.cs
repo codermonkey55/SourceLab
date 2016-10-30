@@ -22,7 +22,6 @@ namespace QuickSnacks.Data.NHibernate.Database
             }
         }
 
-
         static SessionManager()
         {
             KeyedSessions = new Dictionary<string, object>();
@@ -33,12 +32,10 @@ namespace QuickSnacks.Data.NHibernate.Database
             _sessionFactory = sessionFactory;
         }
 
-
         private static void InitializeInternalSessionFactory()
         {
             _sessionFactory = SessionFactoryBuilder.CreateSessionFactory();
         }
-
 
         public static ISession OpenSession(bool beginTransaction)
         {
@@ -49,7 +46,6 @@ namespace QuickSnacks.Data.NHibernate.Database
             return session;
         }
 
-
         public static ISession OpenSession(bool beginTransaction, IDbConnection dbconnection)
         {
             ISession session = SessionFactory.OpenSession(dbconnection);
@@ -58,7 +54,6 @@ namespace QuickSnacks.Data.NHibernate.Database
 
             return session;
         }
-
 
         public static IStatelessSession OpenStatelessSession(bool beginTransaction)
         {
@@ -69,7 +64,6 @@ namespace QuickSnacks.Data.NHibernate.Database
             return statelessSession;
         }
 
-
         public static IStatelessSession OpenStatelessSession(bool beginTransaction, IDbConnection dbconnection)
         {
             IStatelessSession statelessSession = SessionFactory.OpenStatelessSession(dbconnection);
@@ -78,7 +72,6 @@ namespace QuickSnacks.Data.NHibernate.Database
 
             return statelessSession;
         }
-
 
         public static IExtendedSession GetDecoratedSession(bool beginTransaction)
         {
@@ -97,7 +90,6 @@ namespace QuickSnacks.Data.NHibernate.Database
 
             return extSession;
         }
-
 
         public static string BindSession(object session)
         {
@@ -119,7 +111,6 @@ namespace QuickSnacks.Data.NHibernate.Database
 
             return session;
         }
-
 
         private static string GenerateSessionKey()
         {

@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.IO;
-using System.Reflection;
-using FluentNHibernate.Automapping;
+﻿using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using FluentNHibernate.Conventions.Helpers;
 using NHibernate;
+using NHibernate.Cache;
 using NHibernate.Cfg;
 using NHibernate.Cfg.MappingSchema;
+using NHibernate.Context;
 using NHibernate.Dialect;
 using NHibernate.Driver;
 using NHibernate.Event;
@@ -21,6 +18,11 @@ using QuickSnacks.Data.NHibernate.Entities.Base;
 using QuickSnacks.Data.NHibernate.FluentMappings.ClassMaps;
 using QuickSnacks.Data.NHibernate.Interceptors;
 using QuickSnacks.Data.NHibernate.Listeners;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.IO;
+using System.Reflection;
 using Environment = NHibernate.Cfg.Environment;
 
 namespace QuickSnacks.Data.NHibernate.Database
@@ -89,6 +91,7 @@ namespace QuickSnacks.Data.NHibernate.Database
                         {
                             csb.UseQueryCache()
                                .UseSecondLevelCache()
+                               .ProviderClass<HashtableCacheProvider>()
                                .ProviderClass("NHibernate.Cache.HashtableCacheProvider, NHibernate");
                         })
                         .ExposeConfiguration(cfg =>
@@ -100,16 +103,24 @@ namespace QuickSnacks.Data.NHibernate.Database
                             cfg.AddUrl("http://repository.cyrotek.org/nhibernate/configs");
                             cfg.DataBaseIntegration(di =>
                             {
-                                di.ConnectionStringName = "default";
                                 di.Driver<SqlClientDriver>();
                                 di.Dialect<MsSql2008Dialect>();
+                                di.ConnectionReleaseMode = ConnectionReleaseMode.OnClose;
+                                //-> Underlying config property is hbm2ddl.auto which can take any of the following values {"create", "create-drop", "update", "validate"}
+                                di.SchemaAction = SchemaAutoAction.Create;
+                                di.LogSqlInConsole = true;
+                                di.LogFormattedSql = true;
+                                di.ConnectionStringName = "default";
                                 di.IsolationLevel = IsolationLevel.RepeatableRead;
                                 di.Timeout = 10;
                                 di.BatchSize = 10;
                             });
                             cfg.AddProperties(new Dictionary<string, string>
                             {
-                                { Environment.ConnectionString, string.Format("Data Source={0};Version=3;New=True;", "db_FileName") }
+                                { Environment.ConnectionString, string.Format("Data Source={0};Version=3;New=True;", "db_FileName") },
+                                { Environment.UseQueryCache, "true" },
+                                { Environment.CurrentSessionContextClass, typeof(ThreadLocalSessionContext).AssemblyQualifiedName }
+
                             });
                             cfg.AddNamedQuery("", builder => { builder.Query = "CALL sp_name{p1, p2, p3}"; });
                             cfg.GenerateDropSchemaScript(new MsSql2012Dialect());
@@ -148,6 +159,18 @@ namespace QuickSnacks.Data.NHibernate.Database
                 config.Configure("Name of config file if different from defaut: hibernate.cfg.xml"); // Override fluent-configurations with the "hibernate.cfg.xml" file default style.
 
                 ISessionFactory sessionFactory = config.BuildSessionFactory();
+
+                var session = sessionFactory.OpenSession();
+                using (var tx = session.BeginTransaction())
+                {
+                    new SchemaExport(config)
+                    .Execute(useStdOut: true,
+                             execute: true,
+                             justDrop: false,
+                             connection: session.Connection,
+                             exportOutput: Console.Out);
+                    tx.Commit();
+                }
 
                 return sessionFactory;
             }
