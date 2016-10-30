@@ -4,11 +4,9 @@
     <id name="Id" generator="hilo"/>
     <property name="Title" />
     <property name="Description" />
-    <set name="string">
-      <key column="" foreign-key="">
-      </key>
-      <element column="" type="">
-      </element>
+    <set name="Menus" cascade="none">
+      <key column="BrochureId" foreign-key="BrochureId" />
+      <one-to-many class="Menu" />
     </set>
   </class>
 </hibernate-mapping>
