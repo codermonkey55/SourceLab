@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="QuickSnacks.Data.NHibernate" namespace="QuickSnacks.Data.NHibernate.Entities">
+  <class name="MenuItem">
+    <id name="MenuItemId" generator="hilo" />
+    <property name="Name" type="string" />
+    <property name="Description" type="string" />
+    <many-to-one name="Menu" class="Menu" column="MenuId" />
+    <many-to-one name="FingerItem" class="FingerItem" column="FingerItemId" />
+  </class>
+</hibernate-mapping>
