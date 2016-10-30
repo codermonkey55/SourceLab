@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentNHibernate.Mapping;
-using QuickSnacks.Data.NHibernate.Entities.Base;
+﻿using QuickSnacks.Data.NHibernate.Entities.Base;
 
 namespace QuickSnacks.Data.NHibernate.FluentMappings.BaseMaps
 {
@@ -17,6 +11,11 @@ namespace QuickSnacks.Data.NHibernate.FluentMappings.BaseMaps
             this.Map(x => x.EditDate);
 
             this.Component(x => x.AuditInfo);
+            this.Component(x => x.AuditInfo, mapper =>
+            {
+                mapper.Map(x => x.CreateDate);
+                mapper.Map(x => x.EditDate);
+            });
         }
     }
 }

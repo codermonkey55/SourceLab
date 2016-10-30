@@ -14,6 +14,8 @@ namespace QuickSnacks.Data.NHibernate.FluentMappings.ClassMaps
             this.OptimisticLock.Dirty();
             this.HibernateMapping.DefaultLazy();
 
+            this.DiscriminateSubClassesOnColumn("DiscriminatorColumn");
+
             this.Persister(typeof(IEntityPersister).Name);
 
             this.Id(x => x.Id).Not.Nullable().Column("MenuId").GeneratedBy.Native();
