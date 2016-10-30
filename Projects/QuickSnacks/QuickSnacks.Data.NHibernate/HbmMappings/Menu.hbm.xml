@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="QuickSnacks.Data.NHibernate" namespace="QuickSnacks.Data.NHibernate.Entities">
+  <class name="Menu">
+    <id name="MenuId" generator="hilo" />
+    <property name="Name" type="string" />
+    <property name="Description" type="string" />
+    <many-to-one name="Brochure" class="Brochure" column="BrochureId" />
+    <set name="MenuItems" cascade="all-delete-orphans">
+      <key column ="MenuId" foreign-key="MenuId">
+      </key>
+      <one-to-many class="MenuItem"/>
+    </set>
+  </class>
+</hibernate-mapping>
