@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyLine.Data", "SkyLine.Data\SkyLine.Data.csproj", "{C520B5DA-EE48-4876-867E-0CBDD635C536}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyLine.Domain", "SkyLine.Domain\SkyLine.Domain.csproj", "{A16C2502-20EB-4D06-98CF-39ED628C4739}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyLine.Kernel", "SkyLine.Kernel\SkyLine.Kernel.csproj", "{095F0F6E-740B-4C20-A5BA-033471D5454F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkyLine.Website", "SkyLine.Website\SkyLine.Website.csproj", "{2FDA7A25-0688-426F-94D2-BDFD576843C7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C520B5DA-EE48-4876-867E-0CBDD635C536}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C520B5DA-EE48-4876-867E-0CBDD635C536}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C520B5DA-EE48-4876-867E-0CBDD635C536}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C520B5DA-EE48-4876-867E-0CBDD635C536}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A16C2502-20EB-4D06-98CF-39ED628C4739}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A16C2502-20EB-4D06-98CF-39ED628C4739}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A16C2502-20EB-4D06-98CF-39ED628C4739}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A16C2502-20EB-4D06-98CF-39ED628C4739}.Release|Any CPU.Build.0 = Release|Any CPU
+		{095F0F6E-740B-4C20-A5BA-033471D5454F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{095F0F6E-740B-4C20-A5BA-033471D5454F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{095F0F6E-740B-4C20-A5BA-033471D5454F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{095F0F6E-740B-4C20-A5BA-033471D5454F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FDA7A25-0688-426F-94D2-BDFD576843C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FDA7A25-0688-426F-94D2-BDFD576843C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FDA7A25-0688-426F-94D2-BDFD576843C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FDA7A25-0688-426F-94D2-BDFD576843C7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
