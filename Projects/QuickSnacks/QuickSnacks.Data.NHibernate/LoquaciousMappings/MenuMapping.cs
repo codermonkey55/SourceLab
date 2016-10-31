@@ -33,7 +33,7 @@ namespace QuickSnacks.Data.NHibernate.LoquaciousMappings
             Set(e => e.MenuItems, mapper =>
             {
                 mapper.Key(k => k.Column("MenuId"));
-                mapper.Cascade(Cascade.All);
+                mapper.Cascade(Cascade.All.Include(Cascade.DeleteOrphans));
                 mapper.Inverse(false);
                 mapper.Table("MenuItem");
             },
