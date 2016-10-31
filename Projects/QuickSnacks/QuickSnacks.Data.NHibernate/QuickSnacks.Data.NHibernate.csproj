@@ -85,6 +85,7 @@
     <Compile Include="FluentMappings\ClassMaps\MenuMap.cs" />
     <Compile Include="FluentMappings\ClassMaps\TokenMap.cs" />
     <Compile Include="FluentMappings\ClassMaps\UserMap.cs" />
+    <Compile Include="LoquaciousMappings\MenuMapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Listeners\AuditingEventListener.cs" />
     <Compile Include="Listeners\AuditFieldsDirtyCheckingEventListener.cs" />
@@ -97,6 +98,7 @@
     <Content Include="HbmMappings\Menu.hbm.xml" />
     <Content Include="HbmMappings\MenuItem.hbm.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

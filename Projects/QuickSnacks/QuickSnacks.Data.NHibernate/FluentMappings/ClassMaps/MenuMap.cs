@@ -26,6 +26,7 @@ namespace QuickSnacks.Data.NHibernate.FluentMappings.ClassMaps
 
             this.HasMany(b => b.MenuItems).Not.LazyLoad()
                                           .AsSet()
+                                          .Inverse()
                                           .KeyColumn("MenuId")
                                           .Cascade.All();
 
