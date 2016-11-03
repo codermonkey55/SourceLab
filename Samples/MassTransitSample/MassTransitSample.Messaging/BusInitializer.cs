@@ -2,7 +2,7 @@
 using System;
 using System.Configuration;
 
-namespace MassTransitSample
+namespace MassTransitSample.Messaging
 {
     public sealed class BusInitializer
     {
