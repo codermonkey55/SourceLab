@@ -149,6 +149,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RabbitMQ", "RabbitMQ", "{D2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitMQSample", "Samples\RabbitMQSample\RabbitMQSample\RabbitMQSample.csproj", "{F83B5BAF-82F6-4D19-A5B6-FE01FC680E2A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassTransitSample.Messaging", "Samples\MassTransitSample\MassTransitSample.Messaging\MassTransitSample.Messaging.csproj", "{3D30C26B-1FF0-406E-91D5-B7C28649D9FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -735,6 +737,18 @@ Global
 		{F83B5BAF-82F6-4D19-A5B6-FE01FC680E2A}.Release|x64.Build.0 = Release|Any CPU
 		{F83B5BAF-82F6-4D19-A5B6-FE01FC680E2A}.Release|x86.ActiveCfg = Release|Any CPU
 		{F83B5BAF-82F6-4D19-A5B6-FE01FC680E2A}.Release|x86.Build.0 = Release|Any CPU
+		{3D30C26B-1FF0-406E-91D5-B7C28649D9FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D30C26B-1FF0-406E-91D5-B7C28649D9FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D30C26B-1FF0-406E-91D5-B7C28649D9FB}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3D30C26B-1FF0-406E-91D5-B7C28649D9FB}.Debug|x64.Build.0 = Debug|Any CPU
+		{3D30C26B-1FF0-406E-91D5-B7C28649D9FB}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3D30C26B-1FF0-406E-91D5-B7C28649D9FB}.Debug|x86.Build.0 = Debug|Any CPU
+		{3D30C26B-1FF0-406E-91D5-B7C28649D9FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D30C26B-1FF0-406E-91D5-B7C28649D9FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D30C26B-1FF0-406E-91D5-B7C28649D9FB}.Release|x64.ActiveCfg = Release|Any CPU
+		{3D30C26B-1FF0-406E-91D5-B7C28649D9FB}.Release|x64.Build.0 = Release|Any CPU
+		{3D30C26B-1FF0-406E-91D5-B7C28649D9FB}.Release|x86.ActiveCfg = Release|Any CPU
+		{3D30C26B-1FF0-406E-91D5-B7C28649D9FB}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -811,5 +825,6 @@ Global
 		{6CD55F2A-A40F-4CEC-A3CA-B71BF9A6FCA5} = {AEFB65DA-D47A-4B26-9536-0F926384BFCC}
 		{D2CD1AC1-FE88-4671-8A1D-42D464E99B2B} = {2DC63571-2E30-44CD-BDBE-9EFE4AA549FA}
 		{F83B5BAF-82F6-4D19-A5B6-FE01FC680E2A} = {D2CD1AC1-FE88-4671-8A1D-42D464E99B2B}
+		{3D30C26B-1FF0-406E-91D5-B7C28649D9FB} = {AEFB65DA-D47A-4B26-9536-0F926384BFCC}
 	EndGlobalSection
 EndGlobal
