@@ -41,7 +41,14 @@ namespace MassTransitSample
                     rec.Handler<IExampleEvent>(msg => BeginWorkflow(msg));
                 });
             });
+        }
 
+        public void Stop()
+        {
+            _bus = null;
+
+            _activityExecuteBuses.Clear();
+            _activityCompensateBuses.Clear();
         }
 
         internal CourierExample New()
