@@ -1,8 +1,11 @@
 ﻿using MassTransit;
+using MassTransit.Courier;
+using MassTransit.Courier.Contracts;
 using MassTransitSample.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Threading.Tasks;
 
 namespace MassTransitSample
 {
@@ -19,7 +22,7 @@ namespace MassTransitSample
 
         ExampleCourierActivity _exampleCourierActivity;
 
-        public void Run()
+        internal void Run()
         {
             var _receiveEndpointName = ConfigurationManager.AppSettings["MassTransitSample.CourierExample.ReceiveEndpoint.Name"];
             var _baseUri = new Uri(ConfigurationManager.AppSettings["MassTransitSample.BaseUri"]);
@@ -30,7 +33,7 @@ namespace MassTransitSample
             _activityExecuteBuses = new List<IBusControl>();
             _activityExecuteBuses.Add(_exampleCourierActivity.CreateExecuteBus());
 
-            // Register Compensate Buses for fallback scenarios.
+            //-> Register Compensate Buses for fallback scenarios.
             _activityCompensateBuses = new List<IBusControl>();
             _activityCompensateBuses.Add(_exampleCourierActivity.CreateCompensateBus());
 
@@ -38,12 +41,26 @@ namespace MassTransitSample
             {
                 bc.ReceiveEndpoint(_receiveEndpointName, rec =>
                 {
-                    rec.Handler<IExampleEvent>(msg => BeginWorkflow(msg));
+                    rec.Handler<IExampleEvent>(msgCtx => BeginWorkflow(msgCtx));
                 });
             });
         }
 
-        public void Stop()
+        Task BeginWorkflow(ConsumeContext<IExampleEvent> exampleEvent)
+        {
+            return Task.Run(() =>
+            {
+                var builder = new RoutingSlipBuilder(NewId.NextGuid());
+
+                builder.AddActivity(_exampleCourierActivity.ActivityName, _exampleCourierActivity.GetExecuteUri(), exampleEvent);
+
+                RoutingSlip routingSlip = builder.Build();
+
+                _bus.Execute(routingSlip);
+            });
+        }
+
+        internal void Stop()
         {
             _bus = null;
 
@@ -51,7 +68,7 @@ namespace MassTransitSample
             _activityCompensateBuses.Clear();
         }
 
-        internal CourierExample New()
+        internal static CourierExample New()
         {
             return new CourierExample();
         }
