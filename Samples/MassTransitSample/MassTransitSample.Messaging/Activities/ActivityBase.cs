@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace MassTransitSample.Messaging
 {
-    public abstract class SelfHostingActivity<TIActivity, TArguments, TLog> : ISelfHostingActivity<TArguments, TLog>
-        where TIActivity : class, ISelfHostingActivity<TArguments, TLog>
+    public abstract class ActivityBase<TIActivity, TArguments, TLog> : ICourierActivity<TArguments, TLog>
+        where TIActivity : class, ICourierActivity<TArguments, TLog>
         where TArguments : class
         where TLog : class
     {
@@ -25,9 +25,9 @@ namespace MassTransitSample.Messaging
 
 
         // Constructors
-        public SelfHostingActivity() { }
+        public ActivityBase() { }
 
-        public SelfHostingActivity(Uri baseUri) { _baseUri = baseUri; _activityType = typeof(TIActivity); _tArgumentsType = typeof(TArguments); _tLogType = typeof(TLog); }
+        public ActivityBase(Uri baseUri) { _baseUri = baseUri; _activityType = typeof(TIActivity); _tArgumentsType = typeof(TArguments); _tLogType = typeof(TLog); }
 
 
         // Methods
@@ -41,17 +41,17 @@ namespace MassTransitSample.Messaging
 
         public IBusControl CreateExecuteBus(Uri baseUri)
         {
-            return BusInitializer.CreateBus(GetExecuteUri(baseUri), x =>
+            return BusInitializer.CreateBus(baseUri, x =>
             {
-                x.ReceiveEndpoint(GetCompensateUri(baseUri).AbsoluteUri, sbc => sbc.ExecuteActivityHost<TIActivity, TArguments>(_ => default(TIActivity)));
+                x.ReceiveEndpoint(ActivityName, sbc => sbc.ExecuteActivityHost<TIActivity, TArguments>(_ => default(TIActivity)));
             });
         }
 
         public IBusControl CreateCompensateBus(Uri baseUri)
         {
-            return BusInitializer.CreateBus(GetCompensateUri(baseUri), x =>
+            return BusInitializer.CreateBus(baseUri, x =>
             {
-                x.ReceiveEndpoint(GetCompensateUri(baseUri).AbsoluteUri, sbc => sbc.CompensateActivityHost<TIActivity, TLog>(_ => default(TIActivity)));
+                x.ReceiveEndpoint(ActivityName, sbc => sbc.CompensateActivityHost<TIActivity, TLog>(_ => default(TIActivity)));
             });
         }
 

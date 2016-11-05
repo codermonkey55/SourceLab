@@ -65,12 +65,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CourierExample.cs" />
+    <Compile Include="ExampleArguments.cs" />
+    <Compile Include="ExampleCourierActivity.cs" />
+    <Compile Include="ExampleEvent.cs" />
+    <Compile Include="ExampleLog.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MassTransitSample.Messaging\MassTransitSample.Messaging.csproj">
+      <Project>{3d30c26b-1ff0-406e-91d5-b7c28649d9fb}</Project>
+      <Name>MassTransitSample.Messaging</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
