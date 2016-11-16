@@ -23,17 +23,17 @@ namespace MassTransitSample.Messaging
 
                     sbc.UseRetry(Retry.Immediate(5));
 
-                    sbc.ReceiveEndpoint(host, "input_queue", ep =>
-                    {
-                        //ep.Consumer<MyConsumer>();
-                    });
+                    //sbc.ReceiveEndpoint(host, queueName, ep =>
+                    //{
+                    //    //ep.Consumer<MyConsumer>();
+                    //});
                 }
                 else
                 {
                     throw new NotSupportedException("RabbitMQ is the only supported message broker at this time.");
                 }
 
-                appendConfigurations.Invoke(sbc);
+                appendConfigurations(sbc);
             });
 
             return _mqServiceBus;
