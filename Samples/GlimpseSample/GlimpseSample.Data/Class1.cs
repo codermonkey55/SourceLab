@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GlimpseSample.Db
+namespace GlimpseSample.Data
 {
     public class Class1
     {
