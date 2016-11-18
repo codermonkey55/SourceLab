@@ -1,8 +1,8 @@
-# SwiftTier - A sample Multi-Tenancy management suite.
+# SkyLine-Tours - A sample Cave Exploration Tour Service.
 
 ## Summary
 
-This is a simple management suite application meant to provide services for managing various business domains such as apartment complexes.
+This is a simple tailored business managements application for the superficial SkyLine-Tours care exploration services.
 
 ## Purpose
 
