@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using Insight.Database;
+﻿using Insight.Database;
 using ODAC_Sample_FluentDAO;
 using ODAC_Sample_InsightDatabase;
 using ODAC_Sample_NHibernate;
 //using Oracle.ManagedDataAccess.Client;
 //using Oracle.ManagedDataAccess.Types;
 using ODAC_Sample_NHibernate.Entities.Hr;
+using ODACSample.EF;
 using Oracle.DataAccess.Client;
 using Oracle.DataAccess.Types;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
 
 namespace ODAC_Sample
 {
@@ -18,9 +19,11 @@ namespace ODAC_Sample
     {
         static void Main(string[] args)
         {
-            NHibernate_Example();
+            //NHibernate_Example();
 
             //ADO_NET_Example();
+
+            EntityFramework_Example();
 
             //FluentDAO_Example();
 
@@ -59,6 +62,18 @@ namespace ODAC_Sample
             Console.WriteLine(productAddresses.First().AddressLine1);
 
             Console.ReadLine();
+        }
+
+        static void EntityFramework_Example()
+        {
+            var context = new OracleDbContext();
+
+            var results = context.Products.Where(p => p.Category.CategoryName == "Beverages");
+
+            foreach (var result in results)
+            {
+                Console.WriteLine("Product Name: {0} | Quantity Per Unit: {1}, | Unit Price: {2}", result.ProductName, result.QuantityPerUnit, result.UnitPrice);
+            }
         }
 
         static void NHibernate_Example()
@@ -103,16 +118,16 @@ namespace ODAC_Sample
             cmd.CommandText = "HR_DEPTPERCOUNTRY";
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
+            OracleParameter orcOutParam = new OracleParameter("RS_CURSOR", OracleDbType.RefCursor);
+            orcOutParam.Size = 50;
+            orcOutParam.Direction = System.Data.ParameterDirection.Output;
+            cmd.Parameters.Add(orcOutParam);
+
             OracleParameter orcParam = new OracleParameter("CNTR_CD", OracleDbType.Varchar2);
             orcParam.Size = 50;
             orcParam.Value = "UK";
             orcParam.Direction = System.Data.ParameterDirection.Input;
             cmd.Parameters.Add(orcParam);
-
-            OracleParameter orcOutParam = new OracleParameter("RS_CURSOR", OracleDbType.RefCursor);
-            orcOutParam.Size = 50;
-            orcOutParam.Direction = System.Data.ParameterDirection.Output;
-            cmd.Parameters.Add(orcOutParam);
 
             cmd.ExecuteNonQuery();
 
