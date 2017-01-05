@@ -28,7 +28,26 @@ namespace QuickSnacks.Data.NHibernate.LoquaciousMappings
             });
 
             //-> Analogous to Reference mapping method for fluent-nhibernate.
-            ManyToOne(b => b.Brochure, mapping => mapping.Class(typeof(Brochure)));
+            ManyToOne(b => b.Brochure, mapping =>
+            {
+                mapping.Column("Brochure_Id");
+                mapping.Unique(true);
+                mapping.Class(typeof(Brochure));
+                mapping.Cascade(Cascade.None);
+                mapping.Lazy(LazyRelation.NoLazy); // or .NoProxy, .NoLazy
+                mapping.Access(Accessor.Property);
+            });
+
+            OneToOne(x => x.Brochure, mapper =>
+            {
+                mapper.Cascade(Cascade.Persist);
+                mapper.Constrained(true);
+                mapper.Lazy(LazyRelation.Proxy); // or .NoProxy, .NoLazy
+                mapper.PropertyReference(typeof(Brochure).GetPropertyOrFieldMatchingName(nameof(MenuItem.Menu)));
+                mapper.OptimisticLock(true);
+                mapper.Formula("arbitrary SQL expression");
+                mapper.Access(Accessor.Field);
+            });
 
             Set(e => e.MenuItems, mapper =>
             {

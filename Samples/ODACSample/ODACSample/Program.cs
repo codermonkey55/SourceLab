@@ -21,7 +21,7 @@ namespace ODAC_Sample
         {
             //NHibernate_Example();
 
-            //ADO_NET_Example();
+            ADO_NET_Example();
 
             EntityFramework_Example();
 
@@ -41,7 +41,7 @@ namespace ODAC_Sample
         {
             InsightDbProvider.RegisterSqlProvider();
 
-            var conn = new SqlConnection(@"Data Source=www.machinejar.com\DEVSQL02;Initial Catalog=AdventureWorks2014;Persist Security Info=True;User ID=db_user;Password=***");
+            var conn = new SqlConnection(@"Data Source=www.machinejar.com\DEVSQL02;Initial Catalog=AdventureWorks2014;Persist Security Info=True;User ID=db_user;Password=db_password");
 
             var productAddresses = conn.QuerySql<dynamic>("select top 10 *  from Person.Address");
 
@@ -55,7 +55,7 @@ namespace ODAC_Sample
         /// </summary>
         static void FluentDAO_Example()
         {
-            var context = DbContextConfiguration.GetContextUsing(@"Data Source=www.machinejar.com\DEVSQL02;Initial Catalog=AdventureWorks2014;Persist Security Info=True;User ID=db_user;Password=***");
+            var context = DbContextConfiguration.GetContextUsing(@"Data Source=www.machinejar.com\DEVSQL02;Initial Catalog=AdventureWorks2014;Persist Security Info=True;User ID=db_user;Password=db_password");
 
             List<dynamic> productAddresses = context.Sql("select top 10 *  from Person.Address").QueryMany<dynamic>();
 
@@ -78,13 +78,9 @@ namespace ODAC_Sample
 
         static void NHibernate_Example()
         {
-            //var cs = "User Id=hr; Password=hr;data source=HR_TNS;";
-            //var cs = @"Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=localhost)(PORT=1521)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=xe)));User Id=db_user;Password=dbuser123;";
             var cs = "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=www.machinejar.com)(PORT=1522)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=devorc02)));User Id=hr;Password=hr;";
 
             var nhconfig = NHibernateConfig.Instance(cs);
-
-            //var nhconfig = NHibernateConfig.Instance();
 
             var session = nhconfig.SessionFactory.OpenSession();
 
