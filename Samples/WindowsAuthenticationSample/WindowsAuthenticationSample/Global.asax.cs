@@ -44,19 +44,24 @@ namespace WindowsAuthenticationSample
             //}
         }
 
+        protected void Application_AcquireRequestState(object sender, EventArgs e)
+        {
+            // Method intentionally left empty.
+        }
+
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-
+            // Method intentionally left empty.
         }
 
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
         {
-
+            // Method intentionally left empty.
         }
 
         protected void Application_Error(object sender, EventArgs e)
         {
-
+            // Method intentionally left empty.
         }
 
         protected void Application_EndRequest(object sender, EventArgs e)
@@ -73,7 +78,7 @@ namespace WindowsAuthenticationSample
 
         protected void Application_End(object sender, EventArgs e)
         {
-
+            // Method intentionally left empty.
         }
     }
 }
