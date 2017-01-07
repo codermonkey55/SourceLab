@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
 using System.Threading;
@@ -18,7 +19,7 @@ namespace WindowsAuthenticationSample.Models
     {
         public IPrincipal GetAuthenticatedUser()
         {
-            //AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
+            AppDomain.CurrentDomain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
 
             return Thread.CurrentPrincipal as WindowsPrincipal;
         }
@@ -29,7 +30,7 @@ namespace WindowsAuthenticationSample.Models
 
             var secGroups = securityGroups as SecurityGroup[] ?? securityGroups?.ToArray();
 
-            if (secGroups == null || secGroups.Any())
+            if (secGroups == null || !secGroups.Any())
                 return false;
 
             foreach (var secGroup in secGroups)

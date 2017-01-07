@@ -1,9 +1,6 @@
-﻿using System;
+﻿using Stashbox.Attributes;
+using System;
 using System.Collections.Generic;
-using System.Security.Principal;
-using System.Threading;
-using System.Web;
-using Stashbox.Attributes;
 
 namespace WindowsAuthenticationSample.Models
 {
@@ -20,30 +17,24 @@ namespace WindowsAuthenticationSample.Models
         where TAuthorizationManager : IAuthorizationManager
         where TProfileConfiguration : IProfileConfiguration
     {
-        public IReadOnlyCollection<string> UserProfiles;
+        private IReadOnlyCollection<string> _userProfiles;
+        private readonly TAuthorizationManager _authorizationManager;
+        private readonly TProfileConfiguration _profileConfiguration;
 
-        public TAuthorizationManager AuthorizationManager;
-        public TProfileConfiguration ProfileConfiguration;
-
-        public UserManager()
-        {
-
-        }
+        public UserManager() { }
 
         [InjectionConstructor]
         public UserManager(TAuthorizationManager authorizationManager, TProfileConfiguration profileConfiguration)
         {
-            AuthorizationManager = authorizationManager;
-            ProfileConfiguration = profileConfiguration;
+            _authorizationManager = authorizationManager;
+            _profileConfiguration = profileConfiguration;
 
             InitUserProfiles();
         }
 
         public void InitUserProfilePrincipal()
         {
-            var user = GetUserProfilePrincipal();
-            HttpContext.Current.User = user;
-            Thread.CurrentPrincipal = user;
+            GetUserProfilePrincipal().OverrideSystemPrincipals();
         }
 
         public IProfilePrincipal GetUserProfilePrincipal()
@@ -52,13 +43,13 @@ namespace WindowsAuthenticationSample.Models
 
             return (provider = () =>
             {
-                IProfilePrincipal user = null;
+                IProfilePrincipal user = new User();
                 var userProfiles = GetUserProfiles();
                 var securityGroups = GetUserSecurityGroups();
                 var authorizedActions = GetUserAuthorizedActions();
-                var adUser = AuthorizationManager.GetAuthenticatedUser();
-                if (adUser.Identity.IsAuthenticated)
-                    user = new User(adUser.Identity as WindowsIdentity)
+                var ntUser = _authorizationManager.GetAuthenticatedUser();
+                if (ntUser.Identity.IsAuthenticated)
+                    user = new User
                     {
                         Profiles = userProfiles,
                         SecurityGroups = securityGroups,
@@ -79,9 +70,9 @@ namespace WindowsAuthenticationSample.Models
             {
                 var userSecurityGroups = new List<SecurityGroup>();
 
-                foreach (var profile in UserProfiles)
-                    if (ProfileConfiguration.SecurityGroupsByProfile.ContainsKey(profile))
-                        foreach (var secGroup in ProfileConfiguration.SecurityGroupsByProfile[profile])
+                foreach (var profile in _userProfiles)
+                    if (_profileConfiguration.SecurityGroupsByProfile.ContainsKey(profile))
+                        foreach (var secGroup in _profileConfiguration.SecurityGroupsByProfile[profile])
                             userSecurityGroups.Add(new SecurityGroup(secGroup, profile));
 
                 return userSecurityGroups;
@@ -96,9 +87,9 @@ namespace WindowsAuthenticationSample.Models
             {
                 var userAuthorizedActions = new List<AuthorizedAction>();
 
-                foreach (var profile in UserProfiles)
-                    if (ProfileConfiguration.AuthorizedActionsByProfile.ContainsKey(profile))
-                        foreach (var authAction in ProfileConfiguration.AuthorizedActionsByProfile[profile])
+                foreach (var profile in _userProfiles)
+                    if (_profileConfiguration.AuthorizedActionsByProfile.ContainsKey(profile))
+                        foreach (var authAction in _profileConfiguration.AuthorizedActionsByProfile[profile])
                             userAuthorizedActions.Add(new AuthorizedAction(authAction, profile));
 
                 return userAuthorizedActions;
@@ -109,15 +100,15 @@ namespace WindowsAuthenticationSample.Models
         {
             Func<IReadOnlyCollection<string>> provider;
 
-            return UserProfiles ?? (provider = () =>
+            return _userProfiles ?? (provider = () =>
             {
                 var userProfiles = new List<string>();
 
-                foreach (var profile in ProfileConfiguration.GetProfiles())
-                    if (ProfileConfiguration.SecurityGroupsByProfile.ContainsKey(profile))
-                        foreach (var secGroup in ProfileConfiguration.SecurityGroupsByProfile[profile])
+                foreach (var profile in _profileConfiguration.GetProfiles())
+                    if (_profileConfiguration.SecurityGroupsByProfile.ContainsKey(profile))
+                        foreach (var secGroup in _profileConfiguration.SecurityGroupsByProfile[profile])
                         {
-                            if (!AuthorizationManager.IsValidSecurityGroup(secGroup)) continue;
+                            if (!_authorizationManager.IsValidSecurityGroup(secGroup)) continue;
                             userProfiles.Add(profile);
                             break;
                         }
@@ -129,7 +120,7 @@ namespace WindowsAuthenticationSample.Models
 
         private void InitUserProfiles()
         {
-            UserProfiles = GetUserProfiles();
+            _userProfiles = GetUserProfiles();
         }
     }
 }

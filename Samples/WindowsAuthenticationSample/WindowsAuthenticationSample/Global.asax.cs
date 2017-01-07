@@ -25,28 +25,11 @@ namespace WindowsAuthenticationSample
         protected void Session_Start(object sender, EventArgs e)
         {
             DependencyResolver.Current.GetService<IUserManager>().InitUserProfilePrincipal();
-
-            //var userProfiles = userManager.GetUserProfiles();
-            //var securityGroups = userManager.GetUserSecurityGroups();
-            //var authorizedActions = userManager.GetUserAuthorizedActions();
-
-            //if (User.Identity.IsAuthenticated)
-            //{
-            //    var userIdentity = User.Identity as WindowsIdentity;
-            //    var user = new User(userIdentity)
-            //    {
-            //        Profiles = userProfiles,
-            //        SecurityGroups = securityGroups,
-            //        AuthorizedActions = authorizedActions
-            //    };
-            //    HttpContext.Current.User = user;
-            //    Thread.CurrentPrincipal = user;
-            //}
         }
 
         protected void Application_AcquireRequestState(object sender, EventArgs e)
         {
-            // Method intentionally left empty.
+            (Context.User as IProfilePrincipal)?.OverrideSystemPrincipals();
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
