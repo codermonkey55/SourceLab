@@ -67,31 +67,31 @@ namespace WindowsAuthenticationSample
 
         public bool IsExpiredSession()
         {
-            if (Context.Session != null)
+            if (Context.Session == null)
+                return false;
+
+            bool isLogOutPathRequest = false;
+
+            if (Request.UrlReferrer != null)
             {
-                bool isLogOutPathRequest = false;
+                isLogOutPathRequest = Request.UrlReferrer.AbsolutePath.Contains("LogOutUrl");
+            }
 
-                if (Request.UrlReferrer != null)
-                {
-                    isLogOutPathRequest = Request.UrlReferrer.AbsolutePath.Contains("LogOutUrl");
-                }
-
-                if (Session.IsNewSession && !isLogOutPathRequest)
-                {
-                    // - Use when triggering browser to delete ASP.NET Session Cookie.
-                    string cookiesHeader = Request.Headers["Cookie"];
-                    bool isExpiredSession1 = cookiesHeader != null && cookiesHeader.IndexOf("ASP.NET_SessionId") >= 0;
+            if (Session.IsNewSession && !isLogOutPathRequest)
+            {
+                // - Use when triggering browser to delete ASP.NET Session Cookie.
+                string cookiesHeader = Request.Headers["Cookie"];
+                bool isExpiredSession1 = cookiesHeader != null && cookiesHeader.IndexOf("ASP.NET_SessionId", StringComparison.Ordinal) >= 0;
 
 
-                    //-> Use when ressetting ASP.NET Session Cookie.
-                    HttpCookie sessionCookie = Request.Cookies["ASP.NET_SessionId"];
-                    var isExpiredSession2 = string.IsNullOrEmpty(sessionCookie?.Value);
+                //-> Use when ressetting ASP.NET Session Cookie.
+                HttpCookie sessionCookie = Request.Cookies["ASP.NET_SessionId"];
+                var isExpiredSession2 = sessionCookie?.Value != null;
 
-                    //-> Reference Bit...sessionCookie.HttpOnly is set to true when a new ASP.NET session cookie is created, but only after old SP.NET session cookie as been deleted.
-                    //-> bool isNewSession = sessionCookie?.HttpOnly ?? false;"
+                //-> KB Reference...sessionCookie.HttpOnly is set to true when a new ASP.NET session cookie has been created, but only after the old SP.NET session cookie as has expired/been deleted.
+                //-> bool isNewSession = sessionCookie?.HttpOnly ?? false;"
 
-                    return isExpiredSession1 || isExpiredSession2;
-                }
+                return isExpiredSession1 || isExpiredSession2;
             }
 
             return false;
