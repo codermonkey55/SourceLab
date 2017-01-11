@@ -86,7 +86,7 @@ namespace WindowsAuthenticationSample
 
                 //-> Use when ressetting ASP.NET Session Cookie.
                 HttpCookie sessionCookie = Request.Cookies["ASP.NET_SessionId"];
-                var isExpiredSession2 = sessionCookie?.Value != null;
+                var isExpiredSession2 = !string.IsNullOrEmpty(sessionCookie?.Value);
 
                 //-> KB Reference...sessionCookie.HttpOnly is set to true when a new ASP.NET session cookie has been created, but only after the old SP.NET session cookie as has expired/been deleted.
                 //-> bool isNewSession = sessionCookie?.HttpOnly ?? false;"
