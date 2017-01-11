@@ -176,6 +176,7 @@
     <Compile Include="Constants\ProfileActions.cs" />
     <Compile Include="Constants\ProfileGroups.cs" />
     <Compile Include="Constants\Profiles.cs" />
+    <Compile Include="Controllers\AuthorizationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="DependencyInjection\Stashbox\StashboxControllerFactory.cs" />
     <Compile Include="DependencyInjection\Stashbox\StashboxDependencyResolver.cs" />
@@ -231,6 +232,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Authorization\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

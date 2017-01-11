@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Security.Principal;
+using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -62,6 +63,38 @@ namespace WindowsAuthenticationSample
         protected void Application_End(object sender, EventArgs e)
         {
             // Method intentionally left empty.
+        }
+
+        public bool IsExpiredSession()
+        {
+            if (Context.Session != null)
+            {
+                bool isLogOutPathRequest = false;
+
+                if (Request.UrlReferrer != null)
+                {
+                    isLogOutPathRequest = Request.UrlReferrer.AbsolutePath.Contains("LogOutUrl");
+                }
+
+                if (Session.IsNewSession && !isLogOutPathRequest)
+                {
+                    // - Use when triggering browser to delete ASP.NET Session Cookie.
+                    string cookiesHeader = Request.Headers["Cookie"];
+                    bool isExpiredSession1 = cookiesHeader != null && cookiesHeader.IndexOf("ASP.NET_SessionId") >= 0;
+
+
+                    //-> Use when ressetting ASP.NET Session Cookie.
+                    HttpCookie sessionCookie = Request.Cookies["ASP.NET_SessionId"];
+                    var isExpiredSession2 = string.IsNullOrEmpty(sessionCookie?.Value);
+
+                    //-> Reference Bit...sessionCookie.HttpOnly is set to true when a new ASP.NET session cookie is created, but only after old SP.NET session cookie as been deleted.
+                    //-> bool isNewSession = sessionCookie?.HttpOnly ?? false;"
+
+                    return isExpiredSession1 || isExpiredSession2;
+                }
+            }
+
+            return false;
         }
     }
 }

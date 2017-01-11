@@ -35,6 +35,8 @@ namespace CodeLabs.Web.WebForms.IoC_Integration.IoC_Core.Autofac
             // Set MVC DI resolver to use our Autofac container
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
 
+            var currentRequestLifetimeScope = AutofacDependencyResolver.Current.RequestLifetimeScope;
+
             return container;
         }
     }
