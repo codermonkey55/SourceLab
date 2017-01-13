@@ -162,6 +162,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\Attributes\CamelCasedHttpControllerAttribute.cs" />
     <Compile Include="Application\Attributes\MvcAuthorizeAttribute.cs" />
     <Compile Include="Application\Attributes\MvcControllerFilterAttribute.cs" />
     <Compile Include="Application\Attributes\ProfileActionFilterAttribute.cs" />
