@@ -7,6 +7,9 @@ using DryIoc;
 using DryIoc.Mvc;
 using DryIoc.Web;
 using DryIoc.WebApi;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using System.Web.Http;
 using WebActivatorEx;
 
@@ -26,12 +29,16 @@ namespace DIWebAppSample.IoC_Core.DryIoc
 
         public static void Start()
         {
-            ConfigureContainer();
+            var configuredContainer = ConfigureContainer();
+
+            configuredContainer.OpenScope();
         }
 
         public static IContainer ConfigureContainer()
         {
-            container.SetupMvc(typeof(DryIocConfig).Assembly);
+            container.With(rules => rules.With(propertiesAndFields: DeclaredPublicProperties));
+
+            container.SetupMvc(typeof(HomeController).Assembly);
             //-> Or Use the built-in extension which performs the following:
             //----> container = container.With(scopeContext: scopeContext);
             //----> container.RegisterMvcControllers(controllerAssemblies);
@@ -39,13 +46,13 @@ namespace DIWebAppSample.IoC_Core.DryIoc
             //----> DependencyResolver.SetResolver(new DryIocDependencyResolver(container));
             container.WithMvc(new[] { typeof(DryIocConfig).Assembly }, new HttpContextScopeContext());
 
-            container.SetupWebApi(typeof(DryIocConfig).Assembly);
+            container.SetupWebApi(typeof(HomeController).Assembly);
             //-> Or Use the built-in extension which performs the following:
             //----> container = container.With(scopeContext: scopeContext ?? new AsyncExecutionFlowScopeContext());
             //----> container.RegisterWebApiControllers(config, controllerAssemblies);
             //----> container.SetFilterProvider(config.Services);
             //----> config.DependencyResolver = new DryIocDependencyResolver(container, throwIfUnresolved);
-            container.WithWebApi(GlobalConfiguration.Configuration, new[] { typeof(DryIocConfig).Assembly });
+            container.WithWebApi(GlobalConfiguration.Configuration, new[] { typeof(HomeController).Assembly });
 
             RegisterDependencies(container);
 
@@ -64,6 +71,13 @@ namespace DIWebAppSample.IoC_Core.DryIoc
             container.Register<ISitemapPingerService, SitemapPingerService>(Reuse.Transient);
             container.RegisterDelegate<IRobotsService>(resolver => new RobotsService(), Reuse.Singleton);
             container.Register<HomeController>(Reuse.InWebRequest);
+        }
+
+        private static IEnumerable<PropertyOrFieldServiceInfo> DeclaredPublicProperties(Request request)
+        {
+            return (request.ImplementationType ?? request.ServiceType).GetTypeInfo()
+                .DeclaredProperties.Where(p => p.IsInjectable())
+                .Select(PropertyOrFieldServiceInfo.Of);
         }
 
         public static void Shutdown()

@@ -22,7 +22,7 @@ namespace CodeLabs.Web.WebForms.IoC_Integration.IoC_Core.CastleWindsor.Installer
                 container.Register(Component
                     .For(controller)
                     .Named(name)
-                    .LifestylePerWebRequest());
+                    .LifestyleScoped());
             }
         }
     }

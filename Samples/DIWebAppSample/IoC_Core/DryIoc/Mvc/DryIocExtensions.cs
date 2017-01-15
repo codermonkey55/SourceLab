@@ -1,8 +1,10 @@
 ﻿using DryIoc;
 using DryIoc.Mvc;
+using DryIoc.WebApi;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
+using System.Web.Http;
 using System.Web.Mvc;
 
 namespace DIWebAppSample.IoC_Core.Mvc
@@ -15,6 +17,8 @@ namespace DIWebAppSample.IoC_Core.Mvc
             FilterProviders.Providers.Add(new DryIocFilterAttributeFilterProvider(container));
 
             container.SetFilterAttributeFilterProvider(FilterProviders.Providers);
+            //-> Or
+            container.SetFilterProvider(GlobalConfiguration.Configuration.Services);
 
             DependencyResolver.SetResolver(new DryIocDependencyResolver(container));
 
