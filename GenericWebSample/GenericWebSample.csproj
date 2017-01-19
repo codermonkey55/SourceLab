@@ -208,7 +208,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Application\HttpLoggingDelegatingHandler.cs" />
+    <Compile Include="Application\Extensions\Extensions.cs" />
+    <Compile Include="Application\Handlers\HttpLoggingDelegatingHandler.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
