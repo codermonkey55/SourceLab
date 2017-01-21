@@ -128,8 +128,8 @@ namespace QuickSnacks.Data.NHibernate.Database
                             cfg.GenerateSchemaUpdateScript(new MsSql2012Dialect(),
                                 new DatabaseMetadata(null, Dialect.GetDialect()));
 
-                            cfg.SetProperty("generate_statistics", "true");
-                            cfg.SetProperty("timeout", "10");
+                            cfg.SetProperty(Environment.GenerateStatistics, "true");
+                            cfg.SetProperty(Environment.CommandTimeout, "10");
                             cfg.EntityCache<Entity>(ccp => ccp.Strategy = EntityCacheUsage.ReadWrite);
 
                             //--> Clears all previous listeners for given listener type and adds the given listener object.
