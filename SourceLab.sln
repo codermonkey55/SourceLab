@@ -153,6 +153,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSnippetsSample", "Sampl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeSnippetsSample.Library", "Samples\GeneralSamples\CodeSnippetsSample.Library\CodeSnippetsSample.Library.csproj", "{BDD2896E-5498-43A1-8A43-A3634890CA68}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IndividualAuthentication", "IndividualAuthentication", "{F1F18A86-DA75-4694-94A5-9F336B7D2AD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IndividualAuthenticationSample", "Samples\WebSamples\IndividualAuthenticationSample\IndividualAuthenticationSample\IndividualAuthenticationSample.csproj", "{76EE0891-132B-412A-9EBF-B0C80A2C9EA3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -739,6 +743,18 @@ Global
 		{BDD2896E-5498-43A1-8A43-A3634890CA68}.Release|x64.Build.0 = Release|Any CPU
 		{BDD2896E-5498-43A1-8A43-A3634890CA68}.Release|x86.ActiveCfg = Release|Any CPU
 		{BDD2896E-5498-43A1-8A43-A3634890CA68}.Release|x86.Build.0 = Release|Any CPU
+		{76EE0891-132B-412A-9EBF-B0C80A2C9EA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76EE0891-132B-412A-9EBF-B0C80A2C9EA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76EE0891-132B-412A-9EBF-B0C80A2C9EA3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{76EE0891-132B-412A-9EBF-B0C80A2C9EA3}.Debug|x64.Build.0 = Debug|Any CPU
+		{76EE0891-132B-412A-9EBF-B0C80A2C9EA3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{76EE0891-132B-412A-9EBF-B0C80A2C9EA3}.Debug|x86.Build.0 = Debug|Any CPU
+		{76EE0891-132B-412A-9EBF-B0C80A2C9EA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76EE0891-132B-412A-9EBF-B0C80A2C9EA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76EE0891-132B-412A-9EBF-B0C80A2C9EA3}.Release|x64.ActiveCfg = Release|Any CPU
+		{76EE0891-132B-412A-9EBF-B0C80A2C9EA3}.Release|x64.Build.0 = Release|Any CPU
+		{76EE0891-132B-412A-9EBF-B0C80A2C9EA3}.Release|x86.ActiveCfg = Release|Any CPU
+		{76EE0891-132B-412A-9EBF-B0C80A2C9EA3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -817,5 +833,7 @@ Global
 		{40C829E2-4196-434B-A98C-69A1D02A211F} = {2DC63571-2E30-44CD-BDBE-9EFE4AA549FA}
 		{55EB9D59-A35F-49B1-8900-F785F7362834} = {40C829E2-4196-434B-A98C-69A1D02A211F}
 		{BDD2896E-5498-43A1-8A43-A3634890CA68} = {40C829E2-4196-434B-A98C-69A1D02A211F}
+		{F1F18A86-DA75-4694-94A5-9F336B7D2AD5} = {DE5D660B-0197-4733-9B9E-DE292CE6AB5D}
+		{76EE0891-132B-412A-9EBF-B0C80A2C9EA3} = {F1F18A86-DA75-4694-94A5-9F336B7D2AD5}
 	EndGlobalSection
 EndGlobal
