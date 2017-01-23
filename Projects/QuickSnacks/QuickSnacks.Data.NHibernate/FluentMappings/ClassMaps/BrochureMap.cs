@@ -1,13 +1,13 @@
-﻿using FluentNHibernate;
-using FluentNHibernate.Mapping;
-using QuickSnacks.Data.NHibernate.Entities;
+﻿using QuickSnacks.Data.NHibernate.Entities;
 
 namespace QuickSnacks.Data.NHibernate.FluentMappings.ClassMaps
 {
     public class BrochureMap : BaseMaps.AuditMap<Brochure>
     {
+
         public BrochureMap()
         {
+            this.Not.LazyLoad();
             this.Id(x => x.Id).Not.Nullable().Column("BrochureId").GeneratedBy.Native();
             this.Map(x => x.Title).Length(50).Not.Nullable();
             this.Map(x => x.Description).Length(250).Nullable();

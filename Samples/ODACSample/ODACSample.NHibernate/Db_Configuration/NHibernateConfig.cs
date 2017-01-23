@@ -1,8 +1,8 @@
-﻿using System;
-using FluentNHibernate.Cfg;
+﻿using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
 using ODAC_Sample_NHibernate.Mappings;
+using System;
 
 namespace ODAC_Sample_NHibernate
 {

@@ -47,7 +47,7 @@ namespace QuickSnacks.Data.NHibernate.Database
                                 c.Port(1521);
                                 c.Pooling(true);
                             })
-                            .Dialect<Oracle10gDialect>()
+                            .Dialect<Oracle12cDialect>()
                             .Driver<OracleManagedDataClientDriver>()
                             .IsolationLevel(IsolationLevel.ReadCommitted)
                             .DefaultSchema("dbo")
@@ -117,6 +117,7 @@ namespace QuickSnacks.Data.NHibernate.Database
                             });
                             cfg.AddProperties(new Dictionary<string, string>
                             {
+                                { Environment.PrepareSql, bool.TrueString }, //-> Tells nhibernate to reuse existing query plan for different sizes of same parameter.
                                 { Environment.ConnectionString, string.Format("Data Source={0};Version=3;New=True;", "db_FileName") },
                                 { Environment.UseQueryCache, "true" },
                                 { Environment.CurrentSessionContextClass, typeof(ThreadLocalSessionContext).AssemblyQualifiedName }
