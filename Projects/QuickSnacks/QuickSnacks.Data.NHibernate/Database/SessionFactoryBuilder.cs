@@ -153,7 +153,21 @@ namespace QuickSnacks.Data.NHibernate.Database
                             cfg.SetInterceptor(new TrackingInterceptor());
 
                             var schemaExport = new SchemaExport(cfg);
+                            schemaExport.SetOutputFile("schemaExportDDLScript.sql");
                             schemaExport.Create(true, true);
+                            schemaExport.Execute(scriptAction: str => str.ToString(), execute: true, justDrop: false);
+
+                            var updateSchemaFilePath = string.Empty;
+                            var schemaUpdate = new SchemaUpdate(cfg);
+                            Action<string> updateExport = x =>
+                            {
+                                using (var file = new FileStream(updateSchemaFilePath, FileMode.Create, FileAccess.ReadWrite))
+                                using (var sw = new StreamWriter(file))
+                                {
+                                    sw.Write(x);
+                                }
+                            };
+                            schemaUpdate.Execute(scriptAction: updateExport, doUpdate: false);
 
                         });
 
