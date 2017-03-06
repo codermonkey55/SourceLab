@@ -208,6 +208,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Application\Constants\AppPaths.cs" />
+    <Compile Include="Application\Constants\AppRoutes.cs" />
     <Compile Include="Application\Extensions\Extensions.cs" />
     <Compile Include="Application\Handlers\HttpLoggingDelegatingHandler.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />

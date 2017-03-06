@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin.Logging;
+﻿using GenericWebSample.Application.Constants;
+using Microsoft.Owin.Logging;
 using System;
 using System.Diagnostics;
 using System.Text;
@@ -28,8 +29,10 @@ namespace GenericWebSample
 			if (exception == null) return;
 
 			//-> Log all un-handled exceptions.
-			var exceptionMessage = User.Identity.Name;
-			Logger.WriteError(exceptionMessage);
+			var exceptionMessage = new StringBuilder();
+			exceptionMessage.AppendLine($"Error-Message: {exception.Message}");
+			exceptionMessage.AppendLine($"User: {User.Identity.Name}");
+			Logger.WriteError(exceptionMessage.ToString());
 
 			if (Response.HeadersWritten) return;
 
@@ -41,7 +44,7 @@ namespace GenericWebSample
 		{
 			if (Request.Url.AbsolutePath.EndsWith(".aspx", StringComparison.InvariantCultureIgnoreCase))
 			{
-				Response.RedirectToRoute("RouteMameForMvcDefaultPage");
+				Response.RedirectToRoute(AppRoutes.RouteMameForMvcDefaultPage);
 			}
 		}
 
@@ -61,14 +64,14 @@ namespace GenericWebSample
 			if (authorizationManager.IsValidApplicationUser())
 			{
 				//-> Irrelevant for application_start and if not app_start then originating request should have url pre-defined.
-				Response.RedirectToRoute("RouteMameForMvcDefaultPage");
+				Response.RedirectToRoute(AppRoutes.RouteMameForMvcDefaultPage);
 			}
 			else
 			{
 				try
 				{
 					var loginFailureMessage = new StringBuilder();
-					loginFailureMessage.AppendLine("Message: Requesting user is not authorized to use this application.");
+					loginFailureMessage.AppendLine("Info-Message: The Requesting user is not authorized to use this application.");
 					loginFailureMessage.AppendLine($"User: {User.Identity.Name}");
 
 					Logger.WriteError(loginFailureMessage.ToString());
@@ -82,16 +85,19 @@ namespace GenericWebSample
 					}
 					else
 					{
-						Logger.WriteError($"Message: Error encoutered while logging failed authentication attempt by current-user. \nError: {ex.Message}");
+						var failedAuthenticationAttemptMessage = new StringBuilder();
+						failedAuthenticationAttemptMessage.AppendLine("Info-Message: Error encoutered while attempting to log failed authentication attempt by current-user.");
+						failedAuthenticationAttemptMessage.AppendLine($"Error-Message: {ex.Message}");
+						Logger.WriteError(failedAuthenticationAttemptMessage.ToString());
 					}
 				}
 
-				//-> "/" Represents the application root.
-				if (Request.Url.AbsolutePath.Equals("/"))
+				//-> "/" Represents the application root path.
+				if (Request.Url.AbsolutePath.Equals(AppPaths.ApplicationRootPath))
 				{
-					var unAuthorizedRoute = RouteTable.Routes["RouteMameForApplicationUnAuthorizedPage"] as Route;
+					var unAuthorizedRoute = RouteTable.Routes[AppRoutes.RouteNameForApplicationUnAuthorizedPage] as Route;
 					if (unAuthorizedRoute == null)
-						throw new ArgumentNullException(nameof(unAuthorizedRoute), $"Named route: {"RouteNameForApplicationUnAuthorizedPage"}, was not found in the Mvc RouteDictionary with the given name.");
+						throw new ArgumentNullException(nameof(unAuthorizedRoute), $"Named route: {AppRoutes.RouteNameForApplicationUnAuthorizedPage}, was not found in the Mvc Route Dictionary with the given name.");
 
 					Response.Clear();
 					Response.Redirect(unAuthorizedRoute.Url);
@@ -99,7 +105,7 @@ namespace GenericWebSample
 				}
 				else
 				{
-					Response.RedirectToRoute("RouteMameForApplicationUnAuthorizedPage");
+					Response.RedirectToRoute(AppRoutes.RouteNameForApplicationUnAuthorizedPage);
 				}
 			}
 		}
