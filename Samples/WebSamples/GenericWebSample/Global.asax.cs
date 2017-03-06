@@ -91,7 +91,7 @@ namespace GenericWebSample
 				{
 					var unAuthorizedRoute = RouteTable.Routes["RouteMameForApplicationUnAuthorizedPage"] as Route;
 					if (unAuthorizedRoute == null)
-						throw new ArgumentNullException(nameof(unAuthorizedRoute), $"Named route: {"RouteMameForApplicationUnAuthorizedPage"}, was not found in the Mvc RouteDictionary with the given name.");
+						throw new ArgumentNullException(nameof(unAuthorizedRoute), $"Named route: {"RouteNameForApplicationUnAuthorizedPage"}, was not found in the Mvc RouteDictionary with the given name.");
 
 					Response.Clear();
 					Response.Redirect(unAuthorizedRoute.Url);
