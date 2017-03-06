@@ -1,5 +1,6 @@
 ﻿using ODACSample.EF.Entities;
 using ODACSample.EF.Mappings;
+using System;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
@@ -12,6 +13,8 @@ namespace ODACSample.EF
             this.Configuration.LazyLoadingEnabled = true;
             //Disable initializer
             Database.SetInitializer<OracleDbContext>(null);
+
+            Database.Log = sql_Statement => Console.WriteLine(sql_Statement);
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
