@@ -1,6 +1,4 @@
-﻿using FluentNHibernate;
-using FluentNHibernate.Mapping;
-using QuickSnacks.Data.NHibernate.Entities;
+﻿using QuickSnacks.Data.NHibernate.Entities;
 
 namespace QuickSnacks.Data.NHibernate.FluentMappings.ClassMaps
 {
@@ -11,6 +9,11 @@ namespace QuickSnacks.Data.NHibernate.FluentMappings.ClassMaps
             this.Id(x => x.Id).Not.Nullable().Column("MenuItemId").GeneratedBy.Native();
             this.Map(x => x.Name).Length(50).Not.Nullable();
             this.Map(x => x.Description).Length(250).Nullable();
+
+            Join("", part =>
+            {
+                part.Table("");
+            });
 
             this.References(p => p.Menu, "MenuId").Not.Nullable();
 
