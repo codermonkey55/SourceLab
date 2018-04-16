@@ -1,6 +1,7 @@
 ﻿using ODACSample.EF.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
+using System.Linq;
 
 namespace ODACSample.EF.Mappings
 {

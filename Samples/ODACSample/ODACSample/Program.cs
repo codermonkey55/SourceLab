@@ -19,11 +19,11 @@ namespace ODAC_Sample
     {
         static void Main(string[] args)
         {
-            //NHibernate_Example();
+            NHibernate_Example();
 
-            ADO_NET_Example();
+            //ADO_NET_Example();
 
-            EntityFramework_Example();
+            //EntityFramework_Example();
 
             //FluentDAO_Example();
 
@@ -78,9 +78,16 @@ namespace ODAC_Sample
 
         static void NHibernate_Example()
         {
-            var cs = "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=www.machinejar.com)(PORT=1522)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=devorc02)));User Id=hr;Password=hr;";
+            var cs = "Data Source=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=www.machinejar.com)(PORT=1523)))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=devorc02)));User Id=hr;Password=hr;";
 
             var nhconfig = NHibernateConfig.Instance(cs);
+
+            if (nhconfig.SessionFactory == null)
+                Console.WriteLine("Oracle/NHibernate initialization failed.");
+            else
+                Console.WriteLine("Oracle/NHibernate initialization passed!.");
+
+            Console.ReadLine();
 
             var session = nhconfig.SessionFactory.OpenSession();
 

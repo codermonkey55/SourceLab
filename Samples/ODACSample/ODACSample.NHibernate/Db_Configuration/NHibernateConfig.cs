@@ -37,6 +37,7 @@ namespace ODAC_Sample_NHibernate
 
         private ISessionFactory CreateSessionFactory()
         {
+            var sessionFactory = default(ISessionFactory);
             var config = Fluently.Configure();
 
             try
@@ -57,14 +58,17 @@ namespace ODAC_Sample_NHibernate
 
                 config.Mappings(m => m.FluentMappings.AddFromAssemblyOf<HrInfoMap>());
                 config.Mappings(m => m.HbmMappings.AddFromAssemblyOf<HrInfoMap>());
+
+                sessionFactory = config.BuildSessionFactory();
             }
 
             catch (Exception ex)
             {
-                throw ex;
+                Console.WriteLine(ex.ToString());
+                //throw;
             }
 
-            return config.BuildSessionFactory();
+            return sessionFactory;
         }
     }
 }
